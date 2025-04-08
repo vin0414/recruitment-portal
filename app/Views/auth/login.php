@@ -30,7 +30,8 @@
         <div class="container container-tight py-4">
             <div class="card card-md">
                 <div class="card-body">
-                    <h2 class="h2 text-center mb-4">Login to your account</h2>
+                    <h2 class="h2 text-center">DepEd General Trias</h2>
+                    <p class="text-center"><small>Login to your account</small></p>
                     <?php if(!empty(session()->getFlashdata('fail'))) : ?>
                     <div class="alert alert-danger" role="alert">
                         <?= session()->getFlashdata('fail'); ?>

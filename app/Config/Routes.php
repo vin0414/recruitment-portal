@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 //functions
 $routes->post('checkAuth','Home::checkAuth');
+$routes->get('logout','Home::logout');
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
     $routes->get('auth','Home::auth');
