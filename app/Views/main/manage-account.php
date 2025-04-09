@@ -39,38 +39,33 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('upload-video')?>" class="btn btn-secondary"><i
-                                        class="ti ti-upload"></i>&nbsp;Upload</a>
-                                <a href="<?=site_url('go-live')?>"
+                                <a href="<?=site_url('create-account')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                        <path
-                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                        <path d="M7 12l4 0" />
-                                        <path d="M9 10l0 4" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M16 19h6" />
+                                        <path d="M19 16v6" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
                                     </svg>
-                                    Go Live
+                                    Create Account
                                 </a>
-                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                <a href="<?=site_url('create-account')?>"
+                                    class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-user-plus">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                        <path
-                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                        <path d="M7 12l4 0" />
-                                        <path d="M9 10l0 4" />
+                                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                        <path d="M16 19h6" />
+                                        <path d="M19 16v6" />
+                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4" />
                                     </svg>
                                 </a>
                             </div>
@@ -84,6 +79,27 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title"><?=$title?></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="tblaccount">
+                                    <thead>
+                                        <th>#</th>
+                                        <th>Complete Name</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Is Verified</th>
+                                        <th>Action</th>
+                                    </thead>
+                                    <tbody>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -116,6 +132,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="<?=base_url('assets/js/account.js')?>"></script>
 </body>
 
 </html>

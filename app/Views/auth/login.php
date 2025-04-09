@@ -33,7 +33,7 @@
                     <h2 class="h2 text-center">DepEd General Trias</h2>
                     <p class="text-center"><small>Login to your account</small></p>
                     <?php if(!empty(session()->getFlashdata('fail'))) : ?>
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-important alert-danger alert-dismissible" role="alert">
                         <?= session()->getFlashdata('fail'); ?>
                     </div>
                     <?php endif; ?>
@@ -52,10 +52,14 @@
                                 Password
                             </label>
                             <div class="input-group input-group-flat">
-                                <input type="password" class="form-control" name="password" id="password" minlength="8" maxlength="16"
-                                    placeholder="Your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" autocomplete="off" />
+                                <input type="password" class="form-control" name="password" id="password" minlength="8"
+                                    maxlength="16" placeholder="Your password"
+                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                    autocomplete="off" />
                                 <span class="input-group-text">
-                                    <a href="javascript:void(0);" onclick="toggle()" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                    <a href="javascript:void(0);" onclick="toggle()" class="link-secondary"
+                                        title="Show password" data-bs-toggle="tooltip">
                                         <!-- Download SVG icon from http://tabler.io/icons/icon/eye -->
                                         <i id="icon" class="ti ti-eye-closed"></i>
                                     </a>
@@ -87,22 +91,22 @@
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('assets/js/demo.min.js')?>" defer></script>
     <!-- END DEMO SCRIPTS -->
-     <script>
-        function toggle() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-                let elem = document.getElementById('icon');
-                elem.classList.remove("ti-eye-closed");
-                elem.classList.add("ti-eye");
-            } else {
-                x.type = "password";
-                let elem = document.getElementById('icon');
-                elem.classList.remove("ti-eye");
-                elem.classList.add("ti-eye-closed"); 
-            }
+    <script>
+    function toggle() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            let elem = document.getElementById('icon');
+            elem.classList.remove("ti-eye-closed");
+            elem.classList.add("ti-eye");
+        } else {
+            x.type = "password";
+            let elem = document.getElementById('icon');
+            elem.classList.remove("ti-eye");
+            elem.classList.add("ti-eye-closed");
         }
-     </script>
+    }
+    </script>
 </body>
 
 </html>

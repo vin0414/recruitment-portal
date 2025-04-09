@@ -149,4 +149,79 @@ class Home extends BaseController
         $data = ['title'=>$title];
         return view('main/dashboard',$data);
     }
+
+
+    //accounts
+    public function manageAccount()
+    {   
+        $title = "Accounts";
+        $data = ['title'=>$title];
+        return view('main/manage-account',$data);
+    }
+
+    public function fetchAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $builder = $this->db->table('accounts a');
+        $builder->select('a.*,b.role_name');
+        $builder->join('user_role b', 'b.role_id = a.role_id', 'LEFT');
+        $builder->groupBy('a.account_id');
+
+        // Apply search filter if a search term exists
+        if ($searchTerm) {
+            // Add a LIKE condition to filter based on school name or address or any other column you wish to search
+            $builder->groupStart()
+                    ->like('a.fullname', $searchTerm)
+                    ->orLike('a.email', $searchTerm)
+                    ->orLike('b.role_name', $searchTerm)
+                    ->groupEnd();
+        }
+
+        // Execute the query and fetch the results
+        $account = $builder->get()->getResult();
+
+        // Total number of filtered records (with search filter applied)
+        $filteredRecords = count($account);
+
+        $totalRecords = $accountModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($account as $row) {
+            $response['data'][] = [
+                'id' =>$row->account_id,
+                'fullname' => $row->fullname,
+                'email' => $row->email,
+                'role' => $row->role_name,
+                'status' =>($row->status == 0) ? '<span class="badge bg-danger text-white">Inactive</span>' : 
+                            '<span class="badge bg-success text-white">Active</span>',
+                'verify'=>($row->verified== 0) ? '<span class="badge bg-danger text-white">No</span>' : 
+                            '<span class="badge bg-success text-white">Yes</span>',
+                'action' => ($row->status == 1) 
+                ? '<a href="' . site_url("edit-account") . '/' . $row->token . '" class="btn btn-primary"><i class="ti ti-edit"></i> Edit </a>&nbsp;<button type="button" class="btn btn-secondary reset" value="' . $row->account_id . '"><i class="ti ti-refresh"></i> Reset </button>' 
+                : '<a href="' . site_url("edit-account") . '/' . $row->token . '" class="btn btn-primary"><i class="ti ti-edit"></i> Edit </a>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function createAccount()
+    {
+        $title = "Create Account";
+        $data = ['title'=>$title];
+        return view('main/create-account',$data);
+    }
+
+    public function editAccount($id)
+    {
+        $title = "Edit Account";
+        $data = ['title'=>$title];
+        return view('main/edit-account',$data);
+    }
 }

@@ -9,6 +9,8 @@ $routes->get('/', 'Home::index');
 //functions
 $routes->post('checkAuth','Home::checkAuth');
 $routes->get('logout','Home::logout');
+//accounts
+$routes->get('fetch-account','Home::fetchAccount');
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
     $routes->get('auth','Home::auth');
@@ -18,4 +20,8 @@ $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('overview','Home::overview');
+    //account
+    $routes->get('accounts','Home::manageAccount');
+    $routes->get('create-account','Home::createAccount');
+    $routes->get('edit-account/(:any)','Home::editAccount/$1');
 });
