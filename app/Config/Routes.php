@@ -24,4 +24,6 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('accounts','Home::manageAccount');
     $routes->get('create-account','Home::createAccount');
     $routes->get('edit-account/(:any)','Home::editAccount/$1');
+    //settings and maintenance
+    $routes->get('settings','Home::settings');
 });

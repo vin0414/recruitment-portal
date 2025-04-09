@@ -224,4 +224,12 @@ class Home extends BaseController
         $data = ['title'=>$title];
         return view('main/edit-account',$data);
     }
+
+    //settings 
+    public function settings()
+    {
+        $title = "Settings";
+        $data = ['title'=>$title];
+        return view('main/settings',$data);
+    }
 }
