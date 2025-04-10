@@ -11,7 +11,6 @@
     <link href="<?=base_url('assets/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -79,7 +78,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
-                                    <i class="ti ti-user-plus"></i>&nbsp;<?=$title?>
+                                        <i class="ti ti-user-plus"></i>&nbsp;<?=$title?>
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -87,31 +86,35 @@
                                         <?=csrf_field()?>
                                         <div class="col-lg-12">
                                             <label class="form-label">Complete Name</label>
-                                            <input type="text" class="form-control" name="fullname" required/>
+                                            <input type="text" class="form-control" name="fullname" required />
                                             <div id="fullname-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
                                                 <div class="col-lg-8">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" required/>
-                                                    <div id="email-error" class="error-message text-danger text-sm"></div>
+                                                    <input type="email" class="form-control" name="email" required />
+                                                    <div id="email-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label class="form-label">System Role</label>
                                                     <select name="role" class="form-select" required>
                                                         <option value="">Choose</option>
                                                         <?php foreach($role as $row): ?>
-                                                        <option value="<?=$row['role_id']?>"><?=$row['role_name']?></option>
+                                                        <option value="<?=$row['role_id']?>"><?=$row['role_name']?>
+                                                        </option>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <div id="role-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="role-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-label">Office/School</label>
-                                            <select name="office" class="form-select js-example-basic-single" required>
+                                            <select name="office" id="office" class="form-select"
+                                                data-live-search="true" required>
                                                 <option value="">Choose</option>
                                                 <?php foreach($office as $row): ?>
                                                 <option value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
@@ -121,14 +124,25 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-check">
-                                                <input type="checkbox" class="form-check-input" name="agree" value="1"/>
-                                                <span class="form-check-label">Send verification link to activate and access the system</span>
+                                                <input type="checkbox" class="form-check-input" name="agree"
+                                                    value="1" />
+                                                <span class="form-check-label">Send verification link to activate and
+                                                    access the system</span>
                                             </label>
                                         </div>
                                         <div class="col-lg-12">
                                             <button type="submit" class="btn btn-primary">
-                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
-                                            &nbsp;Save Account
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" />
+                                                    <path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                                    <path d="M14 4l0 4l-6 0l0 -4" />
+                                                </svg>
+                                                &nbsp;Save Account
                                             </button>
                                         </div>
                                     </form>
@@ -154,7 +168,7 @@
                                                 <?php foreach($recent as $row): ?>
                                                 <tr>
                                                     <td>
-                                                        <b><?=$row['fullname']?></b><br/>
+                                                        <b><?=$row['fullname']?></b><br />
                                                         <small><?=date('F d, Y',strtotime($row['date_created']))?></small>
                                                     </td>
                                                 </tr>
@@ -198,11 +212,7 @@
     <script src="<?=base_url('assets/js/demo.min.js')?>" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-    $(document).ready(function() {
-        $('.js-example-basic-single').select2();
-    });
     $('#frmAccount').on('submit', function(e) {
         e.preventDefault();
         $('.error-message').html('');
@@ -223,7 +233,7 @@
                         if (result.isConfirmed) {
                             $('#frmAccount')[0].reset();
                             // Perform some action when "Yes" is clicked
-                            location.href = window.location.origin+"/accounts";
+                            location.href = window.location.origin + "/accounts";
                         }
                     });
                 } else {
