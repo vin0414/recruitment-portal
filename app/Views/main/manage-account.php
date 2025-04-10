@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="apple-touch-icon" href="<?=base_url('assets/images/logo.jpg')?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/logo.jpg')?>">
+    <link rel="apple-touch-icon" href="<?=base_url('assets/images/deped-gentri-logo.webp')?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/deped-gentri-logo.webp')?>">
     <title>HR Recruitment Portal</title>
     <link href="<?=base_url('assets/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
@@ -133,6 +133,41 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="<?=base_url('assets/js/account.js')?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).on('click', '.reset', function() {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to reset the password of this account?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Continue',
+                cancelButtonText: 'No, cancel!',
+            }).then((result) => {
+                // Action based on user's choice
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "<?=site_url('reset')?>",
+                        method: "POST",
+                        data: {
+                            value: $(this).val()
+                        },
+                        success: function(response) {
+                            if (response.success) {
+                                Swal.fire({
+                                    title: 'Great!',
+                                    text: "Successfully reset the account",
+                                    icon: 'success',
+                                });
+                            } else {
+                                alert(response);
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

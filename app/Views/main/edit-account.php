@@ -5,13 +5,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="apple-touch-icon" href="<?=base_url('assets/images/logo.jpg')?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/logo.jpg')?>">
+    <link rel="apple-touch-icon" href="<?=base_url('assets/images/deped-gentri-logo.webp')?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/deped-gentri-logo.webp')?>">
     <title>HR Recruitment Portal</title>
     <link href="<?=base_url('assets/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -74,6 +74,63 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
+                    <div class="row g-3">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-8">
+                        <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                    <i class="ti ti-user-plus"></i>&nbsp;<?=$title?>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <form class="row g-3" method="POST" autocomplete="OFF" id="frmAccount">
+                                        <?=csrf_field()?>
+                                        <div class="col-lg-12">
+                                            <label class="form-label">Complete Name</label>
+                                            <input type="text" class="form-control" name="fullname" required/>
+                                            <div id="fullname-error" class="error-message text-danger text-sm"></div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row g-3">
+                                                <div class="col-lg-8">
+                                                    <label class="form-label">Email</label>
+                                                    <input type="email" class="form-control" name="email" required/>
+                                                    <div id="email-error" class="error-message text-danger text-sm"></div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <label class="form-label">System Role</label>
+                                                    <select name="role" class="form-select" required>
+                                                        <option value="">Choose</option>
+                                                        <?php foreach($role as $row): ?>
+                                                        <option value="<?=$row['role_id']?>"><?=$row['role_name']?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <div id="role-error" class="error-message text-danger text-sm"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <label class="form-label">Office/School</label>
+                                            <select name="office" class="form-select js-example-basic-single" required>
+                                                <option value="">Choose</option>
+                                                <?php foreach($office as $row): ?>
+                                                <option value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <div id="office-error" class="error-message text-danger text-sm"></div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-primary">
+                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-device-floppy"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2" /><path d="M12 14m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 4l0 4l-6 0l0 -4" /></svg>
+                                            &nbsp;Save Changes
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -104,8 +161,13 @@
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('assets/js/demo.min.js')?>" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 </body>
 
 </html>

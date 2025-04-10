@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class roleModel extends Model
+class passwordModel extends Model
 {
-    protected $table            = 'user_role';
-    protected $primaryKey       = 'role_id';
+    protected $table            = 'default_password';
+    protected $primaryKey       = 'password_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['role_name','point-system','settings','posting','users','monitoring','date_created'];
+    protected $allowedFields    = ['password','date_created','account_id'];
 
     // Dates
     protected $useTimestamps = false;

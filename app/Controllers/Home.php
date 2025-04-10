@@ -214,22 +214,259 @@ class Home extends BaseController
     public function createAccount()
     {
         $title = "Create Account";
-        $data = ['title'=>$title];
+        //role
+        $roleModel = new \App\Models\roleModel();
+        $role = $roleModel->findAll();
+        //office
+        $officeModel = new \App\Models\officeModel();
+        $office = $officeModel->findAll();
+        //recent
+        $accountModel = new \App\Models\accountModel();
+        $recentAccount = $accountModel->orderBy('account_id','DESC')->limit(5)->findAll();
+        
+        $data = ['title'=>$title,'role'=>$role,'recent'=>$recentAccount,'office'=>$office];
         return view('main/create-account',$data);
     }
 
     public function editAccount($id)
     {
         $title = "Edit Account";
-        $data = ['title'=>$title];
+        //role
+        $roleModel = new \App\Models\roleModel();
+        $role = $roleModel->findAll();
+        //office
+        $officeModel = new \App\Models\officeModel();
+        $office = $officeModel->findAll();
+
+        $data = ['title'=>$title,'role'=>$role,'office'=>$office];
         return view('main/edit-account',$data);
+    }
+
+    public function saveAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $passwordModel = new \App\Models\passwordModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'fullname'=>'required|is_unique[accounts.fullname]',
+            'email'=>'required|valid_email|is_unique[accounts.email]',
+            'role'=>'required',
+            'office'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            function generateRandomString($length = 64) {
+                // Generate random bytes and convert them to hexadecimal
+                $bytes = random_bytes($length);
+                return substr(bin2hex($bytes), 0, $length);
+            }
+            $token_code = generateRandomString(64);
+            //get the default password
+            $password = $passwordModel->first();
+
+            $data = ['role_id'=>$this->request->getPost('role'),
+                    'school_id'=>$this->request->getPost('office'),
+                    'email'=>$this->request->getPost('email'),
+                    'password'=>$password['password'],
+                    'fullname'=>$this->request->getPost('fullname'),
+                    'status'=>1,
+                    'verified'=>0,
+                    'token'=>$token_code,
+                    'date_created'=>date('Y-m-d')];
+            $accountModel->save($data);
+
+            if ($this->request->getPost('agree') !== null)
+            {
+                //send email verification
+                $email = \Config\Services::email();
+                $email->setTo($this->request->getPost('email'));
+                $email->setFrom("vinmogate@gmail.com","HR Recruitment Portal");
+                $imgURL = "assets/images/deped-gentri-logo.webp";
+                $email->attach($imgURL);
+                $cid = $email->setAttachmentCID($imgURL);
+                $template = "<center>
+                <img src='cid:". $cid ."' width='100'/>
+                <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
+                <tr><td><center><h1>Account Verification</h1></center></td></tr>
+                <tr><td><center>Hi, ".$this->request->getPost('fullname')."</center></td></tr>
+                <tr><td><p><center>Please click the link below to activate your account.</center></p></td><tr>
+                <tr><td><center><b>".anchor('verify/'.$token_code,'Verify Account')."</b></center></td></tr>
+                <tr><td><p><center>If you did not sign-up in HR Recruitment Website,<br/> please ignore this message or contact us @ division.gentri@deped.gov.ph</center></p></td></tr>
+                <tr><td><center>IT Support</center></td></tr></tbody></table></center>";
+                $subject = "Account Verification | HR Recruitment Portal";
+                $email->setSubject($subject);
+                $email->setMessage($template);
+                $email->send();
+            }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added new account for '.$this->request->getPost('fullname'),
+                    'page'=>'Create Account',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function verifyAccount($id)
+    {
+        $accountModel = new \App\Models\accountModel();
+        $account = $accountModel->WHERE('Token',$id)->WHERE('status',1)->first();
+        $values = ['verified'=>1];
+        $accountModel->update($account['account_id'],$values);
+        session()->set('loggedUser', $account['account_id']);
+        session()->set('fullname', $account['fullname']);
+        session()->set('is_logged_in',true);
+        return $this->response->redirect(site_url('/overview'));
+    }
+
+    public function resetAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $passwordModel = new \App\Models\passwordModel();
+        $password = $passwordModel->first();
+        $val = $this->request->getPost('value');
+        $data = ['password'=>$password['password']];
+        $accountModel->update($val,$data);
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = ['account_id'=>session()->get('loggedUser'),
+                'activities'=>'Reset account password',
+                'page'=>'Manage Account',
+                'datetime'=>date('Y-m-d h:i:s a')
+                ];      
+        $logModel->save($data);
+        return $this->response->SetJSON(['success' => 'Successfully added']);
     }
 
     //settings 
     public function settings()
     {
         $title = "Settings";
-        $data = ['title'=>$title];
+        //logs
+        $builder = $this->db->table('logs a');
+        $builder->select('a.*,b.fullname');
+        $builder->join('accounts b','b.account_id=a.account_id','LEFT');
+        $logs = $builder->get()->getResult();
+        //get the academic level
+        $academicModel = new \App\Models\academicModel();
+        $academic = $academicModel->findAll();
+
+        $data = ['title'=>$title,'logs'=>$logs,'academic'=>$academic];
         return view('main/settings',$data);
+    }
+
+    public function fetchRole()
+    {
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $roleModel = new \App\Models\roleModel();
+        if ($searchTerm) {
+            $roleModel->like('role_name', $searchTerm); // Assuming you're searching on the 'subjectName' column
+        }
+
+        $role = $roleModel->findAll();
+
+        $totalRecords = $roleModel->countAllResults();
+
+        $roleModel->like('role_name', $searchTerm);
+        $totalFiltered = $roleModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalFiltered,
+            'data' => [] 
+        ];
+        foreach ($role as $row) {
+            $response['data'][] = [
+                'role'=>$row['role_name'],
+                'points' =>($row['point-system']==1) ? 'Yes' : 'No',
+                'setting' =>($row['settings']==1) ? 'Yes' : 'No',
+                'posting' =>($row['posting']==1) ? 'Yes' : 'No',
+                'users' =>($row['users']==1) ? 'Yes' : 'No',
+                'tracking' =>($row['monitoring']==1) ? 'Yes' : 'No',
+                'action' => '<button class="btn btn-success edit" value="' . $row['role_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function fetchOffice()
+    {
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $officeModel = new \App\Models\officeModel();
+        if ($searchTerm) {
+            $officeModel->like('school_name', $searchTerm)
+                        ->orlike('code', $searchTerm);
+        }
+
+        $office = $officeModel->findAll();
+
+        $totalRecords = $officeModel->countAllResults();
+
+        $officeModel->like('school_name', $searchTerm)->orlike('code', $searchTerm);
+        $totalFiltered = $officeModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalFiltered,
+            'data' => [] 
+        ];
+        foreach ($office as $row) {
+            $response['data'][] = [
+                'office'=>$row['school_name'],
+                'code' =>$row['code'],
+                'date' =>date('M d Y',strtotime($row['date_created'])),
+                'action' => '<button class="btn btn-success editOffice" value="' . $row['school_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function saveOffice()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'office'=>'required|is_unique[schools.school_name]',
+            'code'=>'required|is_unique[schools.code]',
+            'type_office'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $officeModel = new \App\Models\officeModel();
+            $data = ['school_name'=>$this->request->getPost('office'),
+                    'academic_id'=>$this->request->getPost('type_office'),
+                    'code'=>$this->request->getPost('code'),
+                    'date_created'=>date('Y-m-d'),
+                    'account_id'=>session()->get('loggedUser')];
+            $officeModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added new office of '.$this->request->getPost('office'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
     }
 }

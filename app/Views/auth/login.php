@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="apple-touch-icon" href="<?=base_url('assets/images/logo.jpg')?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/logo.jpg')?>">
+    <link rel="apple-touch-icon" href="<?=base_url('assets/images/deped-gentri-logo.webp')?>">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/deped-gentri-logo.webp')?>">
     <title>DepEd Gen. Trias - Login</title>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="<?=base_url('assets/css/tabler.min.css')?>" rel="stylesheet" />
