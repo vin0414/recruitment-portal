@@ -110,11 +110,10 @@
                                     <path d="M18.42 12.61a2.1 2.1 0 0 1 2.97 2.97l-6.39 6.42h-3v-3z" />
                                 </svg>
                             </span>
-                            <span class="nav-link-title">&nbsp;Application Tracking </span>
+                            <span class="nav-link-title">&nbsp;Applications</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?=site_url('videos')?>"> Application Submission </a>
-                            <a class="dropdown-item" href="<?=site_url('go-live')?>"> Application Status </a>
+                            <a class="dropdown-item" href="<?=site_url('videos')?>"> Application Submission</a>
                             <a class="dropdown-item" href="<?=site_url('go-live')?>"> Candidate Profile </a>
                         </div>
                     </li>

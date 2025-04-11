@@ -113,8 +113,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-label">Office/School</label>
-                                            <select name="office" id="office" class="form-select"
-                                                data-live-search="true" required>
+                                            <select name="office" id="office" class="form-select" required>
                                                 <option value="">Choose</option>
                                                 <?php foreach($office as $row): ?>
                                                 <option value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
@@ -122,7 +121,7 @@
                                             </select>
                                             <div id="office-error" class="error-message text-danger text-sm"></div>
                                         </div>
-                                        <div class="col-lg-12">
+                                        <div>
                                             <label class="form-check">
                                                 <input type="checkbox" class="form-check-input" name="agree"
                                                     value="1" />

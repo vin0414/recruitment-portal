@@ -47,9 +47,9 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="#" class="dropdown-item">System Role</a>
-                                        <a href="#" class="dropdown-item">Category</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#categoryModal">Category</a>
                                         <a href="#" class="dropdown-item">Academic Level</a>
-                                        <a href="#" class="dropdown-item">Courses</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#courseModal">Courses</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#officeModal">Institutions/Offices</a>
                                         <a href="#" class="dropdown-item">Qualifications</a>
                                         <a href="#" class="dropdown-item">Eligibility</a>
@@ -61,9 +61,9 @@
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
                                         <a href="#" class="dropdown-item">System Role</a>
-                                        <a href="#" class="dropdown-item">Category</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#categoryModal">Category</a>
                                         <a href="#" class="dropdown-item">Academic Level</a>
-                                        <a href="#" class="dropdown-item">Courses</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#courseModal">Courses</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#officeModal">Institutions/Offices</a>
                                         <a href="#" class="dropdown-item">Qualifications</a>
                                         <a href="#" class="dropdown-item">Eligibility</a>
@@ -133,13 +133,12 @@
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="card-title">Application</div>
+                                                    <div class="card-title">Category</div>
                                                     <div class="table-responsive">
                                                         <table class="table table-bordered table-striped" id="tblapplication">
                                                             <thead>
-                                                                <th>#</th>
-                                                                <th>Application Title</th>
-                                                                <th>Date Created</th>
+                                                                <th>Category</th>
+                                                                <th>Code</th>
                                                                 <th>Action</th>
                                                             </thead>
                                                             <tbody></tbody>
@@ -151,14 +150,12 @@
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="card-title">Academic Levels</div>
+                                                    <div class="card-title">Type of Office/Academic</div>
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-striped" id="tbloffice">
+                                                        <table class="table table-bordered table-striped" id="tbl_type">
                                                             <thead>
-                                                                <th>#</th>
-                                                                <th>Academic/Offices</th>
+                                                                <th>Types</th>
                                                                 <th>Code</th>
-                                                                <th>Date Created</th>
                                                                 <th>Action</th>
                                                             </thead>
                                                             <tbody></tbody>
@@ -183,7 +180,6 @@
                                                             <thead>
                                                                 <th>Name of School/Office</th>
                                                                 <th>Code</th>
-                                                                <th>Date</th>
                                                                 <th>Action</th>
                                                             </thead>
                                                             <tbody></tbody>
@@ -201,7 +197,6 @@
                                                             <thead>
                                                                 <th>Courses</th>
                                                                 <th>Code</th>
-                                                                <th>Date</th>
                                                                 <th>Action</th>
                                                             </thead>
                                                             <tbody></tbody>
@@ -317,44 +312,182 @@
         </div>
     </div>
 
+    <div class="modal modal-blur fade" id="courseModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmCourse">
+                        <?=csrf_field()?>
+                        <div class="col-lg-12">
+                            <label class="form-label">Course</label>
+                            <input type="text" class="form-control" name="course" required/>
+                            <div id="course-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Course Code</label>
+                            <input type="text" class="form-control" name="course_code" required/>
+                            <div id="course_code-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="form-control btn btn-primary">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="categoryModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmCategory">
+                        <?=csrf_field()?>
+                        <div class="col-lg-12">
+                            <label class="form-label">Category</label>
+                            <input type="text" class="form-control" name="category" required/>
+                            <div id="category-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Code</label>
+                            <input type="text" class="form-control" name="category_code" required/>
+                            <div id="category_code-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="form-control btn btn-primary">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        $('#frmOffice').on('submit',function(e){
-            e.preventDefault();
-            let data = $(this).serialize();
-            $('.error-message').html('');
-            $.ajax({
-                url: window.location.origin + "/save-office",
-                method: "POST",
-                data: data,
-                success: function(response) {
-                    if (response.success) {
-                        Swal.fire({
-                            title: 'Great!',
-                            text: "Successfully added",
-                            icon: 'success',
-                            confirmButtonText: 'Continue'
-                        }).then((result) => {
-                            // Action based on user's choice
-                            if (result.isConfirmed) {
-                                $('#frmOffice')[0].reset();
-                                $('#officeModal').modal('hide');
-                                // Perform some action when "Yes" is clicked
-                                office.ajax.reload();
-                            }
-                        });
-                    } else {
-                        var errors = response.error;
-                        // Iterate over each error and display it under the corresponding input field
-                        for (var field in errors) {
-                            $('#' + field + '-error').html('<p>' + errors[field] +
-                                '</p>'); // Show the first error message
-                            $('#' + field).addClass(
-                                'text-danger'); // Highlight the input field with an error
+    $('#frmOffice').on('submit',function(e){
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-office",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmOffice')[0].reset();
+                            $('#officeModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            office.ajax.reload();
                         }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
                     }
                 }
-            });
+            }
         });
+    });
+
+    $('#frmCourse').on('submit',function(e){
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-course",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmCourse')[0].reset();
+                            $('#courseModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            courses.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmCategory').on('submit',function(e){
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-category",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmCategory')[0].reset();
+                            $('#categoryModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            app.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
     </script>
 </body>
 

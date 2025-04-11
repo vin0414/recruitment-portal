@@ -85,16 +85,17 @@
                                 <div class="card-body">
                                     <form class="row g-3" method="POST" autocomplete="OFF" id="frmAccount">
                                         <?=csrf_field()?>
+                                        <input type="hidden" name="account_id" value="<?=$account['account_id']?>">
                                         <div class="col-lg-12">
                                             <label class="form-label">Complete Name</label>
-                                            <input type="text" class="form-control" name="fullname" required />
+                                            <input type="text" class="form-control" name="fullname" value="<?=$account['fullname']?>" required />
                                             <div id="fullname-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
                                                 <div class="col-lg-8">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" required />
+                                                    <input type="email" class="form-control" name="email" value="<?=$account['email']?>" required />
                                                     <div id="email-error" class="error-message text-danger text-sm">
                                                     </div>
                                                 </div>
@@ -103,7 +104,7 @@
                                                     <select name="role" class="form-select" required>
                                                         <option value="">Choose</option>
                                                         <?php foreach($role as $row): ?>
-                                                        <option value="<?=$row['role_id']?>"><?=$row['role_name']?>
+                                                        <option <?php echo ($row['role_id'] == $account['role_id']) ? 'selected' : ''; ?> value="<?=$row['role_id']?>"><?=$row['role_name']?>
                                                         </option>
                                                         <?php endforeach; ?>
                                                     </select>
@@ -117,10 +118,90 @@
                                             <select name="office" class="form-select" required>
                                                 <option value="">Choose</option>
                                                 <?php foreach($office as $row): ?>
-                                                <option value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
+                                                <option <?php echo ($row['school_id'] == $account['school_id']) ? 'selected' : ''; ?>  value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <div id="office-error" class="error-message text-danger text-sm"></div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="row g-3">
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Account Status</label>
+                                                    <div class="form-selectgroup-boxes row mb-3">
+                                                        <div class="col-lg-4">
+                                                            <label class="form-selectgroup-item">
+                                                                <input type="radio" name="status" value="1"
+                                                                    class="form-selectgroup-input" checked />
+                                                                <span
+                                                                    class="form-selectgroup-label d-flex align-items-center p-3">
+                                                                    <span class="me-3">
+                                                                        <span class="form-selectgroup-check"></span>
+                                                                    </span>
+                                                                    <span class="form-selectgroup-label-content">
+                                                                        <span
+                                                                            class="form-selectgroup-title strong mb-1">Active</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <label class="form-selectgroup-item">
+                                                                <input type="radio" name="status" value="0"
+                                                                    class="form-selectgroup-input" />
+                                                                <span
+                                                                    class="form-selectgroup-label d-flex align-items-center p-3">
+                                                                    <span class="me-3">
+                                                                        <span class="form-selectgroup-check"></span>
+                                                                    </span>
+                                                                    <span class="form-selectgroup-label-content">
+                                                                        <span
+                                                                            class="form-selectgroup-title strong mb-1">Inactive</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div id="status-error" class="error-message text-danger text-sm"></div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label class="form-label">Account Verification</label>
+                                                    <div class="form-selectgroup-boxes row mb-3">
+                                                        <div class="col-lg-4">
+                                                            <label class="form-selectgroup-item">
+                                                                <input type="radio" name="verified" value="1"
+                                                                    class="form-selectgroup-input" checked />
+                                                                <span
+                                                                    class="form-selectgroup-label d-flex align-items-center p-3">
+                                                                    <span class="me-3">
+                                                                        <span class="form-selectgroup-check"></span>
+                                                                    </span>
+                                                                    <span class="form-selectgroup-label-content">
+                                                                        <span
+                                                                            class="form-selectgroup-title strong mb-1">Yes</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <label class="form-selectgroup-item">
+                                                                <input type="radio" name="verified" value="0"
+                                                                    class="form-selectgroup-input" />
+                                                                <span
+                                                                    class="form-selectgroup-label d-flex align-items-center p-3">
+                                                                    <span class="me-3">
+                                                                        <span class="form-selectgroup-check"></span>
+                                                                    </span>
+                                                                    <span class="form-selectgroup-label-content">
+                                                                        <span
+                                                                            class="form-selectgroup-title strong mb-1">No</span>
+                                                                    </span>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div id="verified-error" class="error-message text-danger text-sm"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <button type="submit" class="btn btn-primary">
@@ -173,6 +254,43 @@
     <script src="<?=base_url('assets/js/demo.min.js')?>" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmAccount').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: window.location.origin + "/modify-account",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = window.location.origin + "/accounts";
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

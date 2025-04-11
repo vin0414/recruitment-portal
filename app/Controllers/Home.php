@@ -47,29 +47,38 @@ class Home extends BaseController
                 $account = $accountModel->WHERE('email',$this->request->getPost('email'))
                                         ->WHERE('verified',1)->WHERE('status',1)
                                         ->first();
-                $checkPassword = Hash::check($this->request->getPost('password'),$account['password']);
-                if(empty($checkPassword)|| !$checkPassword)
+                if(empty($account))
                 {
                     $this->increaseLoginAttempts();
-                    session()->setFlashdata('fail','Invalid Password! Please try again');
+                    session()->setFlashdata('fail','Account does not exist. Please try again');
                     return redirect()->to('auth')->withInput();
                 }
                 else
                 {
-                    session()->set('loggedUser', $account['account_id']);
-                    session()->set('fullname', $account['fullname']);
-                    session()->set('is_logged_in',true);
-                    //logs
-                    date_default_timezone_set('Asia/Manila');
-                    $logModel = new \App\Models\logModel();
-                    $data = ['account_id'=>$account['account_id'],
-                            'activities'=>'Logged On',
-                            'page'=>'Login page',
-                            'datetime'=>date('Y-m-d h:i:s a')
-                            ];      
-                    $logModel->save($data);
-                    $this->resetLoginAttempts();
-                    return redirect()->to('overview');
+                    $checkPassword = Hash::check($this->request->getPost('password'),$account['password']);
+                    if(empty($checkPassword)|| !$checkPassword)
+                    {
+                        $this->increaseLoginAttempts();
+                        session()->setFlashdata('fail','Invalid Password! Please try again');
+                        return redirect()->to('auth')->withInput();
+                    }
+                    else
+                    {
+                        session()->set('loggedUser', $account['account_id']);
+                        session()->set('fullname', $account['fullname']);
+                        session()->set('is_logged_in',true);
+                        //logs
+                        date_default_timezone_set('Asia/Manila');
+                        $logModel = new \App\Models\logModel();
+                        $data = ['account_id'=>$account['account_id'],
+                                'activities'=>'Logged On',
+                                'page'=>'Login page',
+                                'datetime'=>date('Y-m-d h:i:s a')
+                                ];      
+                        $logModel->save($data);
+                        $this->resetLoginAttempts();
+                        return redirect()->to('overview');
+                    }
                 }
             }
         }
@@ -237,8 +246,11 @@ class Home extends BaseController
         //office
         $officeModel = new \App\Models\officeModel();
         $office = $officeModel->findAll();
+        //account
+        $accountModel = new \App\Models\accountModel();
+        $account = $accountModel->WHERE('token',$id)->first();
 
-        $data = ['title'=>$title,'role'=>$role,'office'=>$office];
+        $data = ['title'=>$title,'role'=>$role,'office'=>$office,'account'=>$account];
         return view('main/edit-account',$data);
     }
 
@@ -316,6 +328,44 @@ class Home extends BaseController
         }
     }
 
+    public function modifyAccount()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'fullname'=>'required',
+            'email'=>'required|valid_email',
+            'role'=>'required',
+            'office'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $id = $this->request->getPost('account_id');
+            $data = ['role_id'=>$this->request->getPost('role'),
+                    'school_id'=>$this->request->getPost('office'),
+                    'email'=>$this->request->getPost('email'),
+                    'fullname'=>$this->request->getPost('fullname'),
+                    'status'=>$this->request->getPost('status'),
+                    'verified'=>$this->request->getPost('verified'),];
+            $accountModel->update($id,$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Modify the account of '.$this->request->getPost('fullname'),
+                    'page'=>'Edit Account',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
+        }
+    }
+
     public function verifyAccount($id)
     {
         $accountModel = new \App\Models\accountModel();
@@ -365,6 +415,104 @@ class Home extends BaseController
         return view('main/settings',$data);
     }
 
+    public function saveCategory()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'category'=>'required|is_unique[application.application_name]',
+            'category_code'=>'required|is_unique[application.code]',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $mainModel = new \App\Models\mainModel();
+            $data = ['application_name'=>$this->request->getPost('category'),
+                    'code'=>$this->request->getPost('category_code'),
+                    'date_created'=>date('Y-m-d'),
+                    'account_id'=>session()->get('loggedUser')
+                ];
+            $mainModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added new category of '.$this->request->getPost('category'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function fetchApp()
+    {
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $mainModel = new \App\Models\mainModel();
+        if ($searchTerm) {
+            $mainModel->like('application_name', $searchTerm); // Assuming you're searching on the 'subjectName' column
+        }
+
+        $appTitle = $mainModel->findAll();
+
+        $totalRecords = $mainModel->countAllResults();
+
+        $mainModel->like('application_name', $searchTerm);
+        $totalFiltered = $mainModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalFiltered,
+            'data' => [] 
+        ];
+        foreach ($appTitle as $row) {
+            $response['data'][] = [
+                'title'=>$row['application_name'],
+                'code' =>$row['code'],
+                'action' => '<button class="btn btn-success editApp" value="' . $row['application_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function fetchTypes()
+    {
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $academicModel = new \App\Models\academicModel();
+        if ($searchTerm) {
+            $academicModel->like('academic_name', $searchTerm)->orlike('code', $searchTerm);
+        }
+
+        $academic = $academicModel->findAll();
+
+        $totalRecords = $academicModel->countAllResults();
+
+        $academicModel->like('academic_name', $searchTerm)->orlike('code', $searchTerm);
+        $totalFiltered = $academicModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalFiltered,
+            'data' => [] 
+        ];
+        foreach ($academic as $row) {
+            $response['data'][] = [
+                'title'=>$row['academic_name'],
+                'code' =>$row['code'],
+                'action' => '<button class="btn btn-success editType" value="' . $row['academic_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
     public function fetchRole()
     {
         $searchTerm = $_GET['search']['value'] ?? ''; 
@@ -401,6 +549,72 @@ class Home extends BaseController
         return $this->response->setJSON($response);
     }
 
+    public function fetchCourses()
+    {
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $courseModel = new \App\Models\courseModel();
+        if ($searchTerm) {
+            $courseModel->like('education_name', $searchTerm)->orLike('education_code',$searchTerm);
+        }
+
+        $course = $courseModel->findAll();
+
+        $totalRecords = $courseModel->countAllResults();
+
+        $courseModel->like('education_name', $searchTerm)->orLike('education_code',$searchTerm);
+        $totalFiltered = $courseModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalFiltered,
+            'data' => [] 
+        ];
+        foreach ($course as $row) {
+            $response['data'][] = [
+                'course'=>$row['education_name'],
+                'code'=>$row['education_code'],
+                'action' => '<button class="btn btn-success editCourse" value="' . $row['courses_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function saveCourse()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'course'=>'required|is_unique[courses.education_name]',
+            'course_code'=>'required|is_unique[courses.education_code]',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $courseModel = new \App\Models\courseModel();
+            $data = ['education_name'=>$this->request->getPost('course'),
+                    'education_code'=>$this->request->getPost('course_code'),
+                    'date_created'=>date('Y-m-d'),
+                    'account_id'=>session()->get('loggedUser')
+                ];
+            $courseModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added new course of '.$this->request->getPost('course'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
     public function fetchOffice()
     {
         $searchTerm = $_GET['search']['value'] ?? ''; 
@@ -427,7 +641,6 @@ class Home extends BaseController
             $response['data'][] = [
                 'office'=>$row['school_name'],
                 'code' =>$row['code'],
-                'date' =>date('M d Y',strtotime($row['date_created'])),
                 'action' => '<button class="btn btn-success editOffice" value="' . $row['school_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
             ];
         }
