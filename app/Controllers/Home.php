@@ -722,4 +722,108 @@ class Home extends BaseController
             return $this->response->SetJSON(['success' => 'Successfully added']);
         }
     }
+
+    public function systemPassword()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'password'=>'required|min_length[8]|max_length[12]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $passwordModel = new \App\Models\passwordModel();
+            $password = $passwordModel->first();
+            $defaultPassword = Hash::make($this->request->getPost('password'));
+            if(empty($password)):  
+                $data = ['password'=>$defaultPassword,
+                        'date_created'=>date('Y-m-d'),
+                        'account_id'=>session()->get('loggedUser')];
+                $passwordModel->save($data);
+            else :
+                $data = ['password'=>$defaultPassword];
+                $passwordModel->update($password['password_id'],$data);
+            endif;
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Create new system password',
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
+        }
+    }
+
+    public function fetchCompetence()
+    {
+        $searchTerm = $_GET['search']['value'] ?? ''; 
+        $competenceModel = new \App\Models\competenceModel();
+        if ($searchTerm) {
+            $competenceModel->like('eligibility_name', $searchTerm)
+                        ->orlike('code', $searchTerm);
+        }
+
+        $competence = $competenceModel->findAll();
+
+        $totalRecords = $competenceModel->countAllResults();
+
+        $competenceModel->like('eligibility_name', $searchTerm);
+        $totalFiltered = $competenceModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $totalFiltered,
+            'data' => [] 
+        ];
+        foreach ($competence as $row) {
+            $response['data'][] = [
+                'id'=>$row['eligibility_id'],
+                'title'=>$row['eligibility_name'],
+                'date' =>date('M d Y',strtotime($row['date_created'])),
+                'action' => '<button class="btn btn-success editCompetence" value="' . $row['eligibility_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function saveCompetence()
+    {
+        $competenceModel = new \App\Models\competenceModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'title'=>'required|is_unique[eligibilities.eligibility_name]'
+        ]);   
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['error'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            $data =  ['eligibility_name'=>$this->request->getPost('title'),
+                        'date_created'=>date('Y-m-d'),
+                        'account_id'=>session()->get('loggedUser')];
+            $competenceModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added new competency : '.$this->request->getPost('title'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
 }

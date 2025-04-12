@@ -57,13 +57,14 @@
                                             data-bs-target="#roleModal">System Role</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#categoryModal">Category</a>
-                                        <a href="#" class="dropdown-item">Academic Level</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#officeTypeModal">Type of Office</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#courseModal">Courses</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#officeModal">Institutions/Offices</a>
-                                        <a href="#" class="dropdown-item">Qualifications</a>
-                                        <a href="#" class="dropdown-item">Eligibility</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#competenceModal">Competencies</a>
                                     </div>
                                 </div>
                                 <div class="dropdown">
@@ -83,13 +84,14 @@
                                             data-bs-target="#roleModal">System Role</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#categoryModal">Category</a>
-                                        <a href="#" class="dropdown-item">Academic Level</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#officeTypeModal">Type of Office</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#courseModal">Courses</a>
                                         <a href="#" class="dropdown-item" data-bs-toggle="modal"
                                             data-bs-target="#officeModal">Institutions/Offices</a>
-                                        <a href="#" class="dropdown-item">Qualifications</a>
-                                        <a href="#" class="dropdown-item">Eligibility</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#competenceModal">Competencies</a>
                                     </div>
                                 </div>
                             </div>
@@ -117,13 +119,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-qualification-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-target-arrow"></i>&nbsp;Qualifications
+                                    <a href="#tabs-others-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-adjustments-plus"></i>&nbsp;Offices/Schools/Courses
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#tabs-others-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-adjustments-plus"></i>&nbsp;Others
+                                    <a href="#tabs-qualification-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-target-arrow"></i>&nbsp;Others
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -174,7 +176,7 @@
                                         <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <div class="card-title">Type of Office/Academic</div>
+                                                    <div class="card-title">Type of Offices</div>
                                                     <div class="table-responsive">
                                                         <table class="table table-bordered table-striped" id="tbl_type">
                                                             <thead>
@@ -189,9 +191,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="tab-pane fade" id="tabs-qualification-8">
-
                                 </div>
                                 <div class="tab-pane fade" id="tabs-others-8">
                                     <div class="row g-3">
@@ -228,6 +227,65 @@
                                                             <tbody></tbody>
                                                         </table>
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-qualification-8">
+                                    <div class="row g-3">
+                                        <div class="col-lg-8">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="card-title">Competence</div>
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered table-striped"
+                                                            id="tblcompetence">
+                                                            <thead>
+                                                                <th>#</th>
+                                                                <th>Title</th>
+                                                                <th>Date</th>
+                                                                <th>Action</th>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="card-title">System Security</div>
+                                                    <form method="POST" class="row g-3" id="frmSystem">
+                                                        <?=csrf_field()?>
+                                                        <div class="col-lg-12">
+                                                            <label class="form-label">Password</label>
+                                                            <div class="input-group input-group-flat">
+                                                                <input type="password" class="form-control"
+                                                                    name="password" id="password" minlength="8"
+                                                                    maxlength="16" placeholder="Your password"
+                                                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                                                                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                                                                    autocomplete="off" />
+                                                                <span class="input-group-text">
+                                                                    <a href="javascript:void(0);" onclick="toggle()"
+                                                                        class="link-secondary" title="Show password"
+                                                                        data-bs-toggle="tooltip">
+                                                                        <!-- Download SVG icon from http://tabler.io/icons/icon/eye -->
+                                                                        <i id="icon" class="ti ti-eye-closed"></i>
+                                                                    </a>
+                                                                </span>
+                                                            </div>
+                                                            <div id="password-error"
+                                                                class="error-message text-danger text-sm"></div>
+                                                        </div>
+                                                        <div cs="col-lg-12">
+                                                            <button type="submit" class="btn btn-primary">
+                                                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                                                            </button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -292,310 +350,97 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="<?=base_url('assets/js/settings.js')?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <div class="modal modal-blur fade" id="roleModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New System Role</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" class="row g-2" autocomplete="off" id="frmRole">
-                        <?=csrf_field()?>
-                        <div class="col-lg-12">
-                            <label class="form-label">Name of Role</label>
-                            <input type="text" class="form-control" name="role" required />
-                            <div id="role-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <h3><b>System Permission</b></h3>
-                            <label class="form-label">Point System Module</label>
-                            <div class="form-selectgroup-boxes row mb-3">
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="point_rule" value="1" class="form-selectgroup-input"
-                                            required />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="point_rule" value="0"
-                                            class="form-selectgroup-input" />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">No</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="point_rule-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">Settings Module</label>
-                            <div class="form-selectgroup-boxes row mb-3">
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="settings" value="1" class="form-selectgroup-input"
-                                            required />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="settings" value="0" class="form-selectgroup-input" />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">No</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="settings-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">Job Posting Module</label>
-                            <div class="form-selectgroup-boxes row mb-3">
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="job_posting" value="1" class="form-selectgroup-input"
-                                            required />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="job_posting" value="0"
-                                            class="form-selectgroup-input" />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">No</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="job_posting-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">User Management Module</label>
-                            <div class="form-selectgroup-boxes row mb-3">
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="user_management" value="1"
-                                            class="form-selectgroup-input" required />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="user_management" value="0"
-                                            class="form-selectgroup-input" />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">No</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="user_management-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">Application Tracking Module</label>
-                            <div class="form-selectgroup-boxes row mb-3">
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="tracking" value="1" class="form-selectgroup-input"
-                                            required />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-selectgroup-item">
-                                        <input type="radio" name="tracking" value="0" class="form-selectgroup-input" />
-                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                            <span class="me-3">
-                                                <span class="form-selectgroup-check"></span>
-                                            </span>
-                                            <span class="form-selectgroup-label-content">
-                                                <span class="form-selectgroup-title strong mb-1">No</span>
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-                            </div>
-                            <div id="tracking-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <button type="submit" class="form-control btn btn-primary">
-                                <i class="ti ti-device-floppy"></i>&nbsp;Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal modal-blur fade" id="officeModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New Institutions/Offices</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" class="row g-3" id="frmOffice">
-                        <?=csrf_field()?>
-                        <div class="col-lg-12">
-                            <label class="form-label">Name of Institutions/Offices</label>
-                            <input type="text" class="form-control" name="office" required />
-                            <div id="office-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="row g-3">
-                                <div class="col-lg-6">
-                                    <label class="form-label">Type of Office</label>
-                                    <select name="type_office" class="form-select" required>
-                                        <option value="">Choose</option>
-                                        <?php foreach($academic as $row): ?>
-                                        <option value="<?=$row['academic_id']?>"><?=$row['academic_name']?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <div id="type_office-error" class="error-message text-danger text-sm"></div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <label class="form-label">Code</label>
-                                    <input type="text" class="form-control" name="code" required />
-                                    <div id="code-error" class="error-message text-danger text-sm"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <button type="submit" class="form-control btn btn-primary">
-                                <i class="ti ti-device-floppy"></i>&nbsp;Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal modal-blur fade" id="courseModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New Course</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" class="row g-3" id="frmCourse">
-                        <?=csrf_field()?>
-                        <div class="col-lg-12">
-                            <label class="form-label">Course</label>
-                            <input type="text" class="form-control" name="course" required />
-                            <div id="course-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">Course Code</label>
-                            <input type="text" class="form-control" name="course_code" required />
-                            <div id="course_code-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <button type="submit" class="form-control btn btn-primary">
-                                <i class="ti ti-device-floppy"></i>&nbsp;Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal modal-blur fade" id="categoryModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New Category</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="POST" class="row g-3" id="frmCategory">
-                        <?=csrf_field()?>
-                        <div class="col-lg-12">
-                            <label class="form-label">Category</label>
-                            <input type="text" class="form-control" name="category" required />
-                            <div id="category-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">Code</label>
-                            <input type="text" class="form-control" name="category_code" required />
-                            <div id="category_code-error" class="error-message text-danger text-sm"></div>
-                        </div>
-                        <div class="col-lg-12">
-                            <button type="submit" class="form-control btn btn-primary">
-                                <i class="ti ti-device-floppy"></i>&nbsp;Save
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <?=view('main/templates/setting-modal')?>
     <script>
+    function toggle() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+            let elem = document.getElementById('icon');
+            elem.classList.remove("ti-eye-closed");
+            elem.classList.add("ti-eye");
+        } else {
+            x.type = "password";
+            let elem = document.getElementById('icon');
+            elem.classList.remove("ti-eye");
+            elem.classList.add("ti-eye-closed");
+        }
+    }
+
+    $('#frmOfficeType').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        alert(data);
+    });
+
+    $('#frmSystem').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/system-password",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    $('#frmSystem')[0].reset();
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully submitted",
+                        icon: 'success'
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmCompetence').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-competence",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmCompetence')[0].reset();
+                            $('#competenceModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            list.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
     $('#frmRole').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();

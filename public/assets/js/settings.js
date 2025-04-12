@@ -16,27 +16,27 @@ var role = $('#tblrole').DataTable({
     },
     "searching": true,
     "columns": [
-    {
-        "data": "role"
-    },
-    {
-        "data": "points"
-    },
-    {
-        "data": "setting"
-    },
-    {
-        "data": "posting"
-    },
-    {
-        "data": "users"
-    },
-    {
-        "data": "tracking"
-    },
-    {
-        "data": "action"
-    }
+        {
+            "data": "role"
+        },
+        {
+            "data": "points"
+        },
+        {
+            "data": "setting"
+        },
+        {
+            "data": "posting"
+        },
+        {
+            "data": "users"
+        },
+        {
+            "data": "tracking"
+        },
+        {
+            "data": "action"
+        }
     ]
 });
 
@@ -57,15 +57,15 @@ var courses = $('#tblcourses').DataTable({
     },
     "searching": true,
     "columns": [
-    {
-        "data": "course"
-    },
-    {
-        "data": "code"
-    },
-    {
-        "data": "action"
-    }
+        {
+            "data": "course"
+        },
+        {
+            "data": "code"
+        },
+        {
+            "data": "action"
+        }
     ]
 });
 
@@ -86,15 +86,15 @@ var office = $('#tblinstitution').DataTable({
     },
     "searching": true,
     "columns": [
-    {
-        "data": "office"
-    },
-    {
-        "data": "code"
-    },
-    {
-        "data": "action"
-    }
+        {
+            "data": "office"
+        },
+        {
+            "data": "code"
+        },
+        {
+            "data": "action"
+        }
     ]
 });
 
@@ -115,15 +115,15 @@ let app = $('#tblapplication').DataTable({
     },
     "searching": true,
     "columns": [
-    {
-        "data": "title"
-    },
-    {
-        "data": "code"
-    },
-    {
-        "data": "action"
-    }
+        {
+            "data": "title"
+        },
+        {
+            "data": "code"
+        },
+        {
+            "data": "action"
+        }
     ]
 });
 
@@ -144,14 +144,46 @@ let type_office = $('#tbl_type').DataTable({
     },
     "searching": true,
     "columns": [
-    {
-        "data": "title"
+        {
+            "data": "title"
+        },
+        {
+            "data": "code"
+        },
+        {
+            "data": "action"
+        }
+    ]
+});
+
+let list = $('#tblcompetence').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": {
+        "url": window.location.origin + "/fetch-competence",
+        "type": "GET",
+        "dataSrc": function (json) {
+            // Handle the data if needed
+            return json.data;
+        },
+        "error": function (xhr, error, code) {
+            console.error("AJAX Error: " + error);
+            alert("Error occurred while loading data.");
+        }
     },
-    {
-        "data": "code"
-    },
-    {
-        "data": "action"
-    }
+    "searching": true,
+    "columns": [
+        {
+            "data": "id"
+        },
+        {
+            "data": "title"
+        },
+        {
+            "data": "date"
+        },
+        {
+            "data": "action"
+        }
     ]
 });

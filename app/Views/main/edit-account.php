@@ -88,14 +88,16 @@
                                         <input type="hidden" name="account_id" value="<?=$account['account_id']?>">
                                         <div class="col-lg-12">
                                             <label class="form-label">Complete Name</label>
-                                            <input type="text" class="form-control" name="fullname" value="<?=$account['fullname']?>" required />
+                                            <input type="text" class="form-control" name="fullname"
+                                                value="<?=$account['fullname']?>" required />
                                             <div id="fullname-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
                                                 <div class="col-lg-8">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" name="email" value="<?=$account['email']?>" required />
+                                                    <input type="email" class="form-control" name="email"
+                                                        value="<?=$account['email']?>" required />
                                                     <div id="email-error" class="error-message text-danger text-sm">
                                                     </div>
                                                 </div>
@@ -104,7 +106,9 @@
                                                     <select name="role" class="form-select" required>
                                                         <option value="">Choose</option>
                                                         <?php foreach($role as $row): ?>
-                                                        <option <?php echo ($row['role_id'] == $account['role_id']) ? 'selected' : ''; ?> value="<?=$row['role_id']?>"><?=$row['role_name']?>
+                                                        <option
+                                                            <?php echo ($row['role_id'] == $account['role_id']) ? 'selected' : ''; ?>
+                                                            value="<?=$row['role_id']?>"><?=$row['role_name']?>
                                                         </option>
                                                         <?php endforeach; ?>
                                                     </select>
@@ -118,14 +122,16 @@
                                             <select name="office" class="form-select" required>
                                                 <option value="">Choose</option>
                                                 <?php foreach($office as $row): ?>
-                                                <option <?php echo ($row['school_id'] == $account['school_id']) ? 'selected' : ''; ?>  value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
+                                                <option
+                                                    <?php echo ($row['school_id'] == $account['school_id']) ? 'selected' : ''; ?>
+                                                    value="<?=$row['school_id']?>"><?=$row['school_name']?></option>
                                                 <?php endforeach; ?>
                                             </select>
                                             <div id="office-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-8">
                                                     <label class="form-label">Account Status</label>
                                                     <div class="form-selectgroup-boxes row mb-3">
                                                         <div class="col-lg-4">
@@ -161,12 +167,13 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div id="status-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="status-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     <label class="form-label">Account Verification</label>
                                                     <div class="form-selectgroup-boxes row mb-3">
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <label class="form-selectgroup-item">
                                                                 <input type="radio" name="verified" value="1"
                                                                     class="form-selectgroup-input" checked />
@@ -182,7 +189,7 @@
                                                                 </span>
                                                             </label>
                                                         </div>
-                                                        <div class="col-lg-4">
+                                                        <div class="col-lg-6">
                                                             <label class="form-selectgroup-item">
                                                                 <input type="radio" name="verified" value="0"
                                                                     class="form-selectgroup-input" />
@@ -199,7 +206,8 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div id="verified-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="verified-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

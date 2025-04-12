@@ -25,6 +25,9 @@ $routes->post('save-course','Home::saveCourse');
 $routes->get('fetch-app','Home::fetchApp');
 $routes->post('save-category','Home::saveCategory');
 $routes->get('fetch-types','Home::fetchTypes');
+$routes->post('system-password','Home::systemPassword');
+$routes->get('fetch-competence','Home::fetchCompetence');
+$routes->post('save-competence','Home::saveCompetence');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
