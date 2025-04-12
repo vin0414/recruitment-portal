@@ -40,31 +40,54 @@
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
                                 <div class="dropdown">
-                                    <a href="javascript:void(0);"
-                                        class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M12 5l0 14" />
+                                            <path d="M5 12l14 0" />
+                                        </svg>
                                         Create
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="#" class="dropdown-item">System Role</a>
-                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#categoryModal">Category</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#roleModal">System Role</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#categoryModal">Category</a>
                                         <a href="#" class="dropdown-item">Academic Level</a>
-                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#courseModal">Courses</a>
-                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#officeModal">Institutions/Offices</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#courseModal">Courses</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#officeModal">Institutions/Offices</a>
                                         <a href="#" class="dropdown-item">Qualifications</a>
                                         <a href="#" class="dropdown-item">Eligibility</a>
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                    <a href="javascript:void(0);" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
+                                    <a href="javascript:void(0);" class="btn btn-primary btn-6 d-sm-none btn-icon"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="icon icon-tabler icons-tabler-outline icon-tabler-plus">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M12 5l0 14" />
+                                            <path d="M5 12l14 0" />
+                                        </svg>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-end">
-                                        <a href="#" class="dropdown-item">System Role</a>
-                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#categoryModal">Category</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#roleModal">System Role</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#categoryModal">Category</a>
                                         <a href="#" class="dropdown-item">Academic Level</a>
-                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#courseModal">Courses</a>
-                                        <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#officeModal">Institutions/Offices</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#courseModal">Courses</a>
+                                        <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                            data-bs-target="#officeModal">Institutions/Offices</a>
                                         <a href="#" class="dropdown-item">Qualifications</a>
                                         <a href="#" class="dropdown-item">Eligibility</a>
                                     </div>
@@ -135,7 +158,8 @@
                                                 <div class="card-body">
                                                     <div class="card-title">Category</div>
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-striped" id="tblapplication">
+                                                        <table class="table table-bordered table-striped"
+                                                            id="tblapplication">
                                                             <thead>
                                                                 <th>Category</th>
                                                                 <th>Code</th>
@@ -176,7 +200,8 @@
                                                 <div class="card-body">
                                                     <div class="card-title">Offices/Schools</div>
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-striped" id="tblinstitution">
+                                                        <table class="table table-bordered table-striped"
+                                                            id="tblinstitution">
                                                             <thead>
                                                                 <th>Name of School/Office</th>
                                                                 <th>Code</th>
@@ -193,7 +218,8 @@
                                                 <div class="card-body">
                                                     <div class="card-title">Courses</div>
                                                     <div class="table-responsive">
-                                                        <table class="table table-bordered table-striped" id="tblcourses">
+                                                        <table class="table table-bordered table-striped"
+                                                            id="tblcourses">
                                                             <thead>
                                                                 <th>Courses</th>
                                                                 <th>Code</th>
@@ -217,14 +243,14 @@
                                                 <th>Pages</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($logs as $row): ?>
-                                            <tr>
-                                                <td><?=$row->datetime?></td>
-                                                <td><?=$row->fullname?></td>
-                                                <td><?=$row->activities ?></td>
-                                                <td><?=$row->page ?></td>
-                                            </tr>
-                                            <?php endforeach; ?>
+                                                <?php foreach($logs as $row): ?>
+                                                <tr>
+                                                    <td><?=$row->datetime?></td>
+                                                    <td><?=$row->fullname?></td>
+                                                    <td><?=$row->activities ?></td>
+                                                    <td><?=$row->page ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -267,6 +293,201 @@
     <script src="<?=base_url('assets/js/settings.js')?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <div class="modal modal-blur fade" id="roleModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New System Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-2" autocomplete="off" id="frmRole">
+                        <?=csrf_field()?>
+                        <div class="col-lg-12">
+                            <label class="form-label">Name of Role</label>
+                            <input type="text" class="form-control" name="role" required />
+                            <div id="role-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <h3><b>System Permission</b></h3>
+                            <label class="form-label">Point System Module</label>
+                            <div class="form-selectgroup-boxes row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="point_rule" value="1" class="form-selectgroup-input"
+                                            required />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="point_rule" value="0"
+                                            class="form-selectgroup-input" />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">No</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="point_rule-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Settings Module</label>
+                            <div class="form-selectgroup-boxes row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="settings" value="1" class="form-selectgroup-input"
+                                            required />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="settings" value="0" class="form-selectgroup-input" />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">No</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="settings-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Job Posting Module</label>
+                            <div class="form-selectgroup-boxes row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="job_posting" value="1" class="form-selectgroup-input"
+                                            required />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="job_posting" value="0"
+                                            class="form-selectgroup-input" />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">No</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="job_posting-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">User Management Module</label>
+                            <div class="form-selectgroup-boxes row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="user_management" value="1"
+                                            class="form-selectgroup-input" required />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="user_management" value="0"
+                                            class="form-selectgroup-input" />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">No</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="user_management-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Application Tracking Module</label>
+                            <div class="form-selectgroup-boxes row mb-3">
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="tracking" value="1" class="form-selectgroup-input"
+                                            required />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">Yes</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-selectgroup-item">
+                                        <input type="radio" name="tracking" value="0" class="form-selectgroup-input" />
+                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                            <span class="me-3">
+                                                <span class="form-selectgroup-check"></span>
+                                            </span>
+                                            <span class="form-selectgroup-label-content">
+                                                <span class="form-selectgroup-title strong mb-1">No</span>
+                                            </span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="tracking-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="form-control btn btn-primary">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal modal-blur fade" id="officeModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
@@ -279,7 +500,7 @@
                         <?=csrf_field()?>
                         <div class="col-lg-12">
                             <label class="form-label">Name of Institutions/Offices</label>
-                            <input type="text" class="form-control" name="office" required/>
+                            <input type="text" class="form-control" name="office" required />
                             <div id="office-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
@@ -296,7 +517,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label class="form-label">Code</label>
-                                    <input type="text" class="form-control" name="code" required/>
+                                    <input type="text" class="form-control" name="code" required />
                                     <div id="code-error" class="error-message text-danger text-sm"></div>
                                 </div>
                             </div>
@@ -324,12 +545,12 @@
                         <?=csrf_field()?>
                         <div class="col-lg-12">
                             <label class="form-label">Course</label>
-                            <input type="text" class="form-control" name="course" required/>
+                            <input type="text" class="form-control" name="course" required />
                             <div id="course-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">Course Code</label>
-                            <input type="text" class="form-control" name="course_code" required/>
+                            <input type="text" class="form-control" name="course_code" required />
                             <div id="course_code-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
@@ -355,12 +576,12 @@
                         <?=csrf_field()?>
                         <div class="col-lg-12">
                             <label class="form-label">Category</label>
-                            <input type="text" class="form-control" name="category" required/>
+                            <input type="text" class="form-control" name="category" required />
                             <div id="category-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">Code</label>
-                            <input type="text" class="form-control" name="category_code" required/>
+                            <input type="text" class="form-control" name="category_code" required />
                             <div id="category_code-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
@@ -375,7 +596,45 @@
     </div>
 
     <script>
-    $('#frmOffice').on('submit',function(e){
+    $('#frmRole').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-role",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmRole')[0].reset();
+                            $('#roleModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            role.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmOffice').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
         $('.error-message').html('');
@@ -413,7 +672,7 @@
         });
     });
 
-    $('#frmCourse').on('submit',function(e){
+    $('#frmCourse').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
         $('.error-message').html('');
@@ -451,7 +710,7 @@
         });
     });
 
-    $('#frmCategory').on('submit',function(e){
+    $('#frmCategory').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
         $('.error-message').html('');

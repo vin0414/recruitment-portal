@@ -135,38 +135,38 @@
     <script src="<?=base_url('assets/js/account.js')?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).on('click', '.reset', function() {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to reset the password of this account?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Continue',
-                cancelButtonText: 'No, cancel!',
-            }).then((result) => {
-                // Action based on user's choice
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url: "<?=site_url('reset')?>",
-                        method: "POST",
-                        data: {
-                            value: $(this).val()
-                        },
-                        success: function(response) {
-                            if (response.success) {
-                                Swal.fire({
-                                    title: 'Great!',
-                                    text: "Successfully reset the account",
-                                    icon: 'success',
-                                });
-                            } else {
-                                alert(response);
-                            }
+    $(document).on('click', '.reset', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to reset the password of this account?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Continue',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            // Action based on user's choice
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: window.location.origin + "/reset-account",
+                    method: "POST",
+                    data: {
+                        value: $(this).val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Great!',
+                                text: "Successfully reset the account",
+                                icon: 'success',
+                            });
+                        } else {
+                            alert(response);
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
         });
+    });
     </script>
 </body>
 

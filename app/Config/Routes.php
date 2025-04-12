@@ -16,6 +16,7 @@ $routes->post('save-account','Home::saveAccount');
 $routes->post('reset-account','Home::resetAccount');
 $routes->post('modify-account','Home::modifyAccount');
 //settings
+$routes->post('save-role','Home::saveRole');
 $routes->get('fetch-role','Home::fetchRole');
 $routes->get('fetch-office','Home::fetchOffice');
 $routes->post('save-office','Home::saveoffice');

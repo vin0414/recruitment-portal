@@ -395,7 +395,7 @@ class Home extends BaseController
                 'datetime'=>date('Y-m-d h:i:s a')
                 ];      
         $logModel->save($data);
-        return $this->response->SetJSON(['success' => 'Successfully added']);
+        return $this->response->SetJSON(['success' => 'Successfully reset']);
     }
 
     //settings 
@@ -511,6 +511,46 @@ class Home extends BaseController
         }
         // Return the response as JSON
         return $this->response->setJSON($response);
+    }
+
+    public function saveRole()
+    {
+        $roleModel = new \App\Models\roleModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'role'=>'required|is_unique[user_role.role_name]',
+            'point_rule'=>'required|',
+            'settings'=>'required',
+            'job_posting'=>'required',
+            'user_management'=>'required',
+            'tracking'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data =  ['role_name'=>$this->request->getPost('role'),
+                    'point-system'=>$this->request->getPost('point_rule'),
+                    'settings'=>$this->request->getPost('settings'),
+                    'posting'=>$this->request->getPost('job_posting'),
+                    'users'=>$this->request->getPost('user_management'),
+                    'monitoring'=>$this->request->getPost('tracking'),
+                    'date_created'=>date('Y-m-d')];
+            $roleModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added new role of '.$this->request->getPost('role'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
     }
 
     public function fetchRole()
