@@ -64,8 +64,11 @@ class Home extends BaseController
                     }
                     else
                     {
+                        $roleModel = new \App\Models\roleModel();
+                        $role = $roleModel->WHERE('role_id',$account['role_id'])->first();
                         session()->set('loggedUser', $account['account_id']);
                         session()->set('fullname', $account['fullname']);
+                        session()->set('role',$role['role_name']);
                         session()->set('is_logged_in',true);
                         //logs
                         date_default_timezone_set('Asia/Manila');
@@ -481,6 +484,39 @@ class Home extends BaseController
         return $this->response->setJSON($response);
     }
 
+    public function saveTypes()
+    {
+        $academicModel = new \App\Models\academicModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'office_name'=>'required|is_unique[academic_category.academic_name]',
+            'office_code'=>'required|is_unique[academic_category.code]'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = ['academic_name'=>$this->request->getPost('office_name'),
+                    'code'=>$this->request->getPost('office_code'),
+                    'date_created'=>date('Y-m-d'),
+                    'account_id'=>session()->get('loggedUser')];
+            $academicModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Added type of office : '.$this->request->getPost('office_name'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
     public function fetchTypes()
     {
         $searchTerm = $_GET['search']['value'] ?? ''; 
@@ -582,11 +618,63 @@ class Home extends BaseController
                 'posting' =>($row['posting']==1) ? 'Yes' : 'No',
                 'users' =>($row['users']==1) ? 'Yes' : 'No',
                 'tracking' =>($row['monitoring']==1) ? 'Yes' : 'No',
-                'action' => '<button class="btn btn-success edit" value="' . $row['role_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+                'action' => '<button class="btn btn-success editRole" value="' . $row['role_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
             ];
         }
         // Return the response as JSON
         return $this->response->setJSON($response);
+    }
+
+    public function editRole()
+    { 
+        $val = $this->request->getGet('value');
+        $roleModel = new \App\Models\roleModel();
+        $role = $roleModel->WHERE('role_id',$val)->first();
+        $data = [
+            'id'=>$role['role_id'],
+            'role'=>$role['role_name']
+        ];
+        return $this->response->SetJSON($data);
+    }
+
+    public function updateRole()
+    {
+        $roleModel = new \App\Models\roleModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'role'=>'required',
+            'point_rule'=>'required|',
+            'settings'=>'required',
+            'job_posting'=>'required',
+            'user_management'=>'required',
+            'tracking'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $id = $this->request->getPost('role_id');
+            $data =  ['role_name'=>$this->request->getPost('role'),
+                    'point-system'=>$this->request->getPost('point_rule'),
+                    'settings'=>$this->request->getPost('settings'),
+                    'posting'=>$this->request->getPost('job_posting'),
+                    'users'=>$this->request->getPost('user_management'),
+                    'monitoring'=>$this->request->getPost('tracking')];
+            $roleModel->update($id,$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Apply changes in '.$this->request->getPost('role'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
+        }
     }
 
     public function fetchCourses()
@@ -655,6 +743,52 @@ class Home extends BaseController
         }
     }
 
+    public function editCourse()
+    {
+        $val = $this->request->getGet('value');
+        $courseModel = new \App\Models\courseModel();
+        $course = $courseModel->WHERE('courses_id',$val)->first();
+        $data = [
+            'id'=>$course['courses_id'],
+            'name'=>$course['education_name'],
+            'code'=>$course['education_code']
+        ];
+        return $this->response->SetJSON($data);
+    }
+
+    public function updateCourse()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'course'=>'required',
+            'course_code'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $courseModel = new \App\Models\courseModel();
+            $id = $this->request->getPost('course_id');
+            $data = ['education_name'=>$this->request->getPost('course'),
+                    'education_code'=>$this->request->getPost('course_code'),
+                ];
+            $courseModel->update($id,$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Update the course of '.$this->request->getPost('course'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully applied Changes']);
+        }
+    }
+
     public function fetchOffice()
     {
         $searchTerm = $_GET['search']['value'] ?? ''; 
@@ -720,6 +854,54 @@ class Home extends BaseController
                     ];      
             $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function editOffice()
+    {
+        $val = $this->request->getGet('value');
+        $officeModel = new \App\Models\officeModel();
+        $office = $officeModel->WHERE('school_id',$val)->first();
+        $data = [
+            'id'=>$office['school_id'],
+            'school'=>$office['school_name'],
+            'code'=>$office['code'],
+            'academic'=>$office['academic_id']
+        ];
+        return $this->response->SetJSON($data);
+    }
+
+    public function updateOffice()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'office'=>'required',
+            'code'=>'required',
+            'type_office'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $officeModel = new \App\Models\officeModel();
+            $id = $this->request->getPost('office_id');
+            $data = ['school_name'=>$this->request->getPost('office'),
+                    'academic_id'=>$this->request->getPost('type_office'),
+                    'code'=>$this->request->getPost('code')];
+            $officeModel->update($id,$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Update the office of '.$this->request->getPost('office'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
         }
     }
 

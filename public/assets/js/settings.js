@@ -187,3 +187,58 @@ let list = $('#tblcompetence').DataTable({
         }
     ]
 });
+//fetching data using json
+$(document).on('click', '.editRole', function () {
+    $.ajax({
+        url: window.location.origin + "/fetch-edit-role",
+        method: "GET",
+        data: { value: $(this).val() },
+        dataType: "JSON",
+        success: function (response) {
+            $('#role_id').attr("value", response.id);
+            $('#role').attr("value", response.role);
+            $('#editRoleModal').modal('show');
+        }
+    });
+});
+
+$(document).on('click', '.editCourse', function () {
+    $.ajax({
+        url: window.location.origin + "/fetch-edit-course",
+        method: "GET",
+        data: { value: $(this).val() },
+        dataType: "JSON",
+        success: function (response) {
+            $('#course_id').attr("value", response.id);
+            $('#course').attr("value", response.name);
+            $('#course_code').attr("value", response.code);
+            $('#editCourseModal').modal('show');
+        }
+    });
+});
+
+$(document).on('click', '.editOffice', function () {
+    $.ajax({
+        url: window.location.origin + "/fetch-edit-office",
+        method: "GET",
+        data: { value: $(this).val() },
+        dataType: "JSON",
+        success: function (response) {
+            $('#office_id').attr("value", response.id);
+            $('#office').attr("value", response.school);
+            $('#code').attr("value", response.code);
+            function selectOptionByValue(value) {
+                const selectElement = document.getElementById('type_office');
+                [...selectElement.options].forEach(option => {
+                    if (option.value == value) {
+                        option.selected = true;
+                    } else {
+                        option.selected = false;
+                    }
+                });
+            }
+            selectOptionByValue(response.academic);
+            $('#editOfficeModal').modal('show');
+        }
+    });
+});

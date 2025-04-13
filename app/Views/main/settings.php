@@ -351,6 +351,7 @@
     <script src="<?=base_url('assets/js/settings.js')?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <?=view('main/templates/setting-modal')?>
+    <?=view('main/templates/edit-setting-modal')?>
     <script>
     function toggle() {
         var x = document.getElementById("password");
@@ -370,7 +371,39 @@
     $('#frmOfficeType').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
-        alert(data);
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-types",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmOfficeType')[0].reset();
+                            $('#officeTypeModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            type_office.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
     });
 
     $('#frmSystem').on('submit', function(e) {
@@ -479,6 +512,43 @@
         });
     });
 
+    $('#frmEditRole').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-role",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editRoleModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            role.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
     $('#frmOffice').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
@@ -517,6 +587,43 @@
         });
     });
 
+    $('#frmEditOffice').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-office",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editOfficeModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            office.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
     $('#frmCourse').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
@@ -537,6 +644,43 @@
                         if (result.isConfirmed) {
                             $('#frmCourse')[0].reset();
                             $('#courseModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            courses.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmEditCourse').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-course",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editCourseModal').modal('hide');
                             // Perform some action when "Yes" is clicked
                             courses.ajax.reload();
                         }
