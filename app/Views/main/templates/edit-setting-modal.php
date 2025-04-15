@@ -182,7 +182,7 @@
                         <div id="tracking-error" class="error-message text-danger text-sm"></div>
                     </div>
                     <div class="col-lg-12">
-                        <button type="submit" class="form-control btn btn-primary">
+                        <button type="submit" class="form-control btn btn-outline-success">
                             <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
                         </button>
                     </div>
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        <button type="submit" class="form-control btn btn-primary">
+                        <button type="submit" class="form-control btn btn-outline-success">
                             <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
                         </button>
                     </div>
@@ -261,7 +261,7 @@
                         <div id="course_code-error" class="error-message text-danger text-sm"></div>
                     </div>
                     <div class="col-lg-12">
-                        <button type="submit" class="form-control btn btn-primary">
+                        <button type="submit" class="form-control btn btn-outline-success">
                             <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
                         </button>
                     </div>

@@ -39,7 +39,7 @@
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
                                 <a href="<?=site_url('accounts')?>"
-                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                    class="btn btn-outline-success btn-5 d-none d-sm-inline-block">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round"
@@ -51,7 +51,8 @@
                                     </svg>
                                     Back
                                 </a>
-                                <a href="<?=site_url('accounts')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                <a href="<?=site_url('accounts')?>"
+                                    class="btn btn-outline-success btn-6 d-sm-none btn-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                         stroke-linejoin="round"
@@ -130,7 +131,7 @@
                                             </label>
                                         </div>
                                         <div class="col-lg-12">
-                                            <button type="submit" class="btn btn-primary">
+                                            <button type="submit" class="btn btn-outline-success">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                     viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

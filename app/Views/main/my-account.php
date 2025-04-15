@@ -63,8 +63,12 @@
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <label class="form-label">Role</label>
+                                                    <?php
+                                                    $roleModel = new \App\Models\roleModel();
+                                                    $role = $roleModel->WHERE('role_id',$account['role_id'])->first(); 
+                                                    ?>
                                                     <input type="text" class="form-control"
-                                                        value="">
+                                                        value="<?=$role['role_name']?>">
                                                 </div>
                                             </div>
                                         </div>
@@ -81,9 +85,9 @@
                                                 <div class="col-lg-6">
                                                     <label class="form-label">Account Verified</label>
                                                     <?php if($account['verified']==1): ?>
-                                                        <span class="badge bg-success text-white">Verified</span>
+                                                    <span class="badge bg-success text-white">Verified</span>
                                                     <?php else : ?>
-                                                        <span class="badge bg-danger text-white">Please verify</span>
+                                                    <span class="badge bg-danger text-white">Please verify</span>
                                                     <?php endif; ?>
                                                 </div>
                                             </div>
@@ -119,7 +123,7 @@
                                             </div>
                                         </div>
                                         <div cs="col-lg-12">
-                                            <button type="submit" class="btn btn-primary form-control">Save
+                                            <button type="submit" class="btn btn-outline-success form-control">Save
                                                 Changes</button>
                                         </div>
                                     </form>

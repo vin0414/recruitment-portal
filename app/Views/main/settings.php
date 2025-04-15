@@ -40,7 +40,8 @@
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
                                 <div class="dropdown">
-                                    <a href="javascript:void(0);" class="btn btn-primary btn-5 d-none d-sm-inline-block"
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-outline-success btn-5 d-none d-sm-inline-block"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -68,7 +69,8 @@
                                     </div>
                                 </div>
                                 <div class="dropdown">
-                                    <a href="javascript:void(0);" class="btn btn-primary btn-6 d-sm-none btn-icon"
+                                    <a href="javascript:void(0);"
+                                        class="btn btn-outline-success btn-6 d-sm-none btn-icon"
                                         data-bs-toggle="dropdown" aria-expanded="false">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -281,7 +283,7 @@
                                                                 class="error-message text-danger text-sm"></div>
                                                         </div>
                                                         <div cs="col-lg-12">
-                                                            <button type="submit" class="btn btn-primary">
+                                                            <button type="submit" class="btn btn-outline-success">
                                                                 <i class="ti ti-device-floppy"></i>&nbsp;Save
                                                             </button>
                                                         </div>

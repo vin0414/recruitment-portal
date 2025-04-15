@@ -228,8 +228,8 @@ class Home extends BaseController
                 'verify'=>($row->verified== 0) ? '<span class="badge bg-danger text-white">No</span>' : 
                             '<span class="badge bg-success text-white">Yes</span>',
                 'action' => ($row->status == 1) 
-                ? '<a href="' . site_url("edit-account") . '/' . $row->token . '" class="btn btn-primary"><i class="ti ti-edit"></i> Edit </a>&nbsp;<button type="button" class="btn btn-secondary reset" value="' . $row->account_id . '"><i class="ti ti-refresh"></i> Reset </button>' 
-                : '<a href="' . site_url("edit-account") . '/' . $row->token . '" class="btn btn-primary"><i class="ti ti-edit"></i> Edit </a>'
+                ? '<a href="' . site_url("edit-account") . '/' . $row->token . '" class="btn btn-outline-success"><i class="ti ti-edit"></i> Edit </a>&nbsp;<button type="button" class="btn btn-secondary reset" value="' . $row->account_id . '"><i class="ti ti-refresh"></i> Reset </button>' 
+                : '<a href="' . site_url("edit-account") . '/' . $row->token . '" class="btn btn-outline-success"><i class="ti ti-edit"></i> Edit </a>'
             ];
         }
         // Return the response as JSON

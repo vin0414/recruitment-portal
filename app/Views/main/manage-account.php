@@ -40,7 +40,7 @@
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
                                 <a href="<?=site_url('create-account')?>"
-                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                    class="btn btn-outline-success btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -55,7 +55,7 @@
                                     Create Account
                                 </a>
                                 <a href="<?=site_url('create-account')?>"
-                                    class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                    class="btn btn-outline-success btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
