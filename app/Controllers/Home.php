@@ -162,6 +162,19 @@ class Home extends BaseController
         return view('main/dashboard',$data);
     }
 
+    public function jobPosting()
+    {
+        $title = "Job Posting";
+        $data = ['title'=>$title];
+        return view('main/job-posting',$data);
+    }
+
+    public function pointSystem()
+    {
+        $title = "Point System";
+        $data = ['title'=>$title];
+        return view('main/point-system',$data);
+    }
 
     //accounts
     public function manageAccount()
@@ -1007,5 +1020,16 @@ class Home extends BaseController
             $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully added']);
         }
+    }
+
+    public function myAccount()
+    {
+        $title = "My Account";
+        //account
+        $accountModel = new \App\Models\AccountModel();
+        $account = $accountModel->WHERE('account_id',session()->get('loggedUser'))->first();
+
+        $data = ['title'=>$title,'account'=>$account];
+        return view('main/my-account',$data);
     }
 }

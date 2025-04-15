@@ -1,0 +1,211 @@
+DEBUG - 2025-04-15 01:21:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-15 01:21:39 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\recruitment-portal\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_recruite', 3306, '', 0)
+#1 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#4 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('vinmogate@gmail...', 'accounts.email', Array)
+#6 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('vinmogate@gmail...', 'accounts.email', Array, NULL, 'email')
+#7 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('email', 'email', 'vinmogate@gmail...', Array, Array, 'email')
+#8 C:\Users\Warvin B Mogate\recruitment-portal\system\Controller.php(138): CodeIgniter\Validation\Validation->run()
+#9 C:\Users\Warvin B Mogate\recruitment-portal\app\Controllers\Home.php(29): CodeIgniter\Controller->validate(Array)
+#10 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(933): App\Controllers\Home->checkAuth()
+#11 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\Users\Warvin B Mogate\recruitment-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#14 C:\Users\Warvin B Mogate\recruitment-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#15 C:\Users\Warvin B Mogate\recruitment-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#16 C:\Users\Warvin B Mogate\recruitment-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#17 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\recruitment-portal\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1\nFROM `...', Array, false)
+#3 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('vinmogate@gmail...', 'accounts.email', Array)
+#5 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('vinmogate@gmail...', 'accounts.email', Array, NULL, 'email')
+#6 C:\Users\Warvin B Mogate\recruitment-portal\system\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('email', 'email', 'vinmogate@gmail...', Array, Array, 'email')
+#7 C:\Users\Warvin B Mogate\recruitment-portal\system\Controller.php(138): CodeIgniter\Validation\Validation->run()
+#8 C:\Users\Warvin B Mogate\recruitment-portal\app\Controllers\Home.php(29): CodeIgniter\Controller->validate(Array)
+#9 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(933): App\Controllers\Home->checkAuth()
+#10 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#11 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\Users\Warvin B Mogate\recruitment-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\Users\Warvin B Mogate\recruitment-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\Users\Warvin B Mogate\recruitment-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\Users\Warvin B Mogate\recruitment-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#16 {main}
+CRITICAL - 2025-04-15 01:21:39 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: POST, Route: checkAuth]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT 1
+FROM `accounts`
+WHERE `email` = :email:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Validation\Rules.php(132): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\Validation\StrictRules\Rules.php(148): CodeIgniter\Validation\Rules->is_not_unique('vinmogate@gmail.com', 'accounts.email', [...])
+ 5 SYSTEMPATH\Validation\Validation.php(337): CodeIgniter\Validation\StrictRules\Rules->is_not_unique('vinmogate@gmail.com', 'accounts.email', [...], null, 'email')
+ 6 SYSTEMPATH\Validation\Validation.php(202): CodeIgniter\Validation\Validation->processRules('email', 'email', 'vinmogate@gmail.com', [...], [...], 'email')
+ 7 SYSTEMPATH\Controller.php(138): CodeIgniter\Validation\Validation->run()
+ 8 APPPATH\Controllers\Home.php(29): CodeIgniter\Controller->validate([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->checkAuth()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\recruitment-portal\\public\\index.php')
+DEBUG - 2025-04-15 01:21:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:21:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:22:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:22:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:22:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:36:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 01:36:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 03:35:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 03:35:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 03:35:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 03:35:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 03:36:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 03:41:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 12:54:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:54:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:56:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:56:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:56:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:57:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:57:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 04:57:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:02:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-15 05:02:49 --> mysqli_sql_exception: Unknown column 'accountID' in 'where clause' in C:\Users\Warvin B Mogate\recruitment-portal\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\Users\Warvin B Mogate\recruitment-portal\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Warvin B Mogate\recruitment-portal\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\recruitment-portal\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\Users\Warvin B Mogate\recruitment-portal\app\Controllers\Home.php(1030): CodeIgniter\BaseModel->first()
+#7 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(933): App\Controllers\Home->myAccount()
+#8 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 C:\Users\Warvin B Mogate\recruitment-portal\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Warvin B Mogate\recruitment-portal\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Warvin B Mogate\recruitment-portal\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Warvin B Mogate\recruitment-portal\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\Warvin B Mogate\recruitment-portal\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#14 {main}
+CRITICAL - 2025-04-15 05:02:49 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'accountID' in 'where clause'
+[Method: GET, Route: my-account]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `accounts`
+WHERE `accountID` = :accountID:
+ LIMIT 1', [...], false)
+ 2 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 4 APPPATH\Controllers\Home.php(1030): CodeIgniter\BaseModel->first()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->myAccount()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\recruitment-portal\\public\\index.php')
+CRITICAL - 2025-04-15 05:02:49 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'accountID' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `accounts`
+WHERE `accountID` = \'1\'
+ LIMIT 1')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `accounts`
+WHERE `accountID` = \'1\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `accounts`
+WHERE `accountID` = :accountID:
+ LIMIT 1', [...], false)
+ 4 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 6 APPPATH\Controllers\Home.php(1030): CodeIgniter\BaseModel->first()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->myAccount()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\recruitment-portal\\public\\index.php')
+CRITICAL - 2025-04-15 05:02:49 --> [Caused by] mysqli_sql_exception: Unknown column 'accountID' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *
+FROM `accounts`
+WHERE `accountID` = \'1\'
+ LIMIT 1', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `accounts`
+WHERE `accountID` = \'1\'
+ LIMIT 1')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `accounts`
+WHERE `accountID` = \'1\'
+ LIMIT 1')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `accounts`
+WHERE `accountID` = :accountID:
+ LIMIT 1', [...], false)
+ 5 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 7 APPPATH\Controllers\Home.php(1030): CodeIgniter\BaseModel->first()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->myAccount()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\recruitment-portal\\public\\index.php')
+DEBUG - 2025-04-15 05:03:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-15 05:03:06 --> ErrorException: Undefined array key "Fullname"
+[Method: GET, Route: my-account]
+in APPPATH\Views\main\my-account.php on line 55.
+ 1 APPPATH\Views\main\my-account.php(55): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "Fullname"', 'C:\\Users\\Warvin B Mogate\\recruitment-portal\\app\\Views\\main\\my-account.php', 55)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\recruitment-portal\\app\\Views\\main\\my-account.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('main/my-account', [], true)
+ 5 APPPATH\Controllers\Home.php(1033): view('main/my-account', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->myAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\recruitment-portal\\public\\index.php')
+DEBUG - 2025-04-15 05:03:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-15 05:03:39 --> ErrorException: Undefined array key "DateCreated"
+[Method: GET, Route: my-account]
+in APPPATH\Views\main\my-account.php on line 77.
+ 1 APPPATH\Views\main\my-account.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "DateCreated"', 'C:\\Users\\Warvin B Mogate\\recruitment-portal\\app\\Views\\main\\my-account.php', 77)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\recruitment-portal\\app\\Views\\main\\my-account.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('main/my-account', [], true)
+ 5 APPPATH\Controllers\Home.php(1033): view('main/my-account', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->myAccount()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\recruitment-portal\\public\\index.php')
+DEBUG - 2025-04-15 05:03:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:06:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:10:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:10:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:10:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:11:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-15 05:11:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

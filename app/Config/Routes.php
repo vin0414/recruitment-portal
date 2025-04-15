@@ -52,10 +52,16 @@ $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('overview','Home::overview');
+    //job posting
+    $routes->get('job-posting','Home::jobPosting');
+    //point system
+    $routes->get('point-system','Home::pointSystem');
     //account
     $routes->get('accounts','Home::manageAccount');
     $routes->get('create-account','Home::createAccount');
     $routes->get('edit-account/(:any)','Home::editAccount/$1');
     //settings and maintenance
     $routes->get('settings','Home::settings');
+    //my account
+    $routes->get('my-account','Home::myAccount');
 });

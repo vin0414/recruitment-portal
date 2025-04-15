@@ -92,7 +92,7 @@
                         </a>
                     </li>
                     <li
-                        class="nav-item dropdown <?= ($title == 'Videos' || $title == 'Upload Video' || $title == 'Play Video' || $title == 'Edit Video' || $title == 'Live Streaming') ? 'active' : '' ?>">
+                        class="nav-item dropdown <?= ($title == 'Applications' || $title == 'Application Submission' || $title == 'Candidate Profile ') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-plugins" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -113,12 +113,12 @@
                             <span class="nav-link-title">&nbsp;Applications</span>
                         </a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?=site_url('videos')?>"> Application Submission</a>
-                            <a class="dropdown-item" href="<?=site_url('go-live')?>"> Candidate Profile </a>
+                            <a class="dropdown-item" href="<?=site_url('applications')?>"> Application Submission</a>
+                            <a class="dropdown-item" href="<?=site_url('candidates')?>"> Candidate Profile </a>
                         </div>
                     </li>
                     <li class="nav-item <?= ($title == 'Job Posting') ? 'active' : '' ?>">
-                        <a class="nav-link" href="<?=site_url('accounts')?>">
+                        <a class="nav-link" href="<?=site_url('job-posting')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round"
