@@ -118,8 +118,6 @@
                                                 <th>Job Grade</th>
                                                 <th>Employment</th>
                                                 <th>Status</th>
-                                                <th>Posted Date</th>
-                                                <th>Closing Date</th>
                                                 <th>Action</th>
                                             </thead>
                                         </table>

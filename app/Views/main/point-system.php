@@ -44,6 +44,34 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
+                    <div class="card">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
+                                <li class="nav-item">
+                                    <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
+                                        <i class="ti ti-books"></i>&nbsp;Educations
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-training-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-certificate"></i>&nbsp;Trainings
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-job-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-briefcase"></i>&nbsp;Experiences
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <div class="tab-pane fade active show" id="tabs-home-8"></div>
+                                <div class="tab-pane fade" id="tabs-training-8"></div>
+                                <div class="tab-pane fade" id="tabs-job-8"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
