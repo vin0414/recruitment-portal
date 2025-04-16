@@ -162,12 +162,23 @@ class Home extends BaseController
         return view('main/dashboard',$data);
     }
 
+    //job
+
     public function jobPosting()
     {
         $title = "Job Posting";
         $data = ['title'=>$title];
-        return view('main/job-posting',$data);
+        return view('main/job/job-posting',$data);
     }
+
+    public function createJob()
+    {
+        $title = "Post A Job";
+        $data = ['title'=>$title];
+        return view('main/job/create-job',$data);
+    }
+
+    //point system
 
     public function pointSystem()
     {
@@ -465,6 +476,52 @@ class Home extends BaseController
         }
     }
 
+    public function editCategory()
+    {
+        $val = $this->request->getGet('value');
+        $mainModel = new \App\Models\mainModel();
+        $main = $mainModel->WHERE('application_id',$val)->first();
+        $data = [
+            'id'=>$val,
+            'title'=>$main['application_name'],
+            'code'=>$main['code']
+        ];
+        return $this->response->SetJSON($data);
+    }
+
+    public function updateCategory()
+    {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'category'=>'required',
+            'category_code'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $mainModel = new \App\Models\mainModel();
+            $id = $this->request->getPost('category_id');
+            $data = ['application_name'=>$this->request->getPost('category'),
+                    'code'=>$this->request->getPost('category_code')
+                ];
+            $mainModel->update($id,$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Update category of '.$this->request->getPost('category'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
     public function fetchApp()
     {
         $searchTerm = $_GET['search']['value'] ?? ''; 
@@ -528,6 +585,51 @@ class Home extends BaseController
             $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully added']);
         }
+    }
+
+    public function updateTypes()
+    {
+        $academicModel = new \App\Models\academicModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'office_name'=>'required',
+            'office_code'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $id = $this->request->getPost('office_id');
+            $data = ['academic_name'=>$this->request->getPost('office_name'),
+                    'code'=>$this->request->getPost('office_code')];
+            $academicModel->update($id,$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Update type of office : '.$this->request->getPost('office_name'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function editTypes()
+    {
+        $val = $this->request->getGet('value');
+        $academicModel = new \App\Models\academicModel();
+        $academic = $academicModel->WHERE('academic_id',$val)->first();
+        $data = [
+            'id'=>$academic['academic_id'],
+            'name'=>$academic['academic_name'],
+            'code'=>$academic['code']
+        ];
+        return $this->response->SetJSON($data);
     }
 
     public function fetchTypes()
@@ -957,6 +1059,50 @@ class Home extends BaseController
         }
     }
 
+    public function changePassword()
+    {
+        $accountModel = new \App\Models\accountModel();
+        $user = session()->get('loggedUser');
+        $validation = $this->validate([
+            'current_password'=>'required|min_length[8]|max_length[12]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]',
+            'new_password'=>'required|min_length[8]|max_length[12]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]',
+            'confirm_password'=>'required|matches[new_password]|min_length[8]|max_length[12]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $oldpassword = $this->request->getPost('current_password');
+            $newpassword = $this->request->getPost('new_password');
+
+            $account = $accountModel->WHERE('account_id',$user)->first();
+            $checkPassword = Hash::check($oldpassword,$account['password']);
+            if(!$checkPassword||empty($checkPassword))
+            {
+                $error = ['current_password'=>'Password mismatched. Please try again'];
+                return $this->response->SetJSON(['error' => $error]);
+            }
+            else
+            {
+                if(($oldpassword==$newpassword))
+                {
+                    $error = ['new_password'=>'The new password cannot be the same as the current password.'];
+                    return $this->response->SetJSON(['error' => $error]);
+                }
+                else
+                {
+                    $HashPassword = Hash::make($newpassword);
+                    $data = ['password'=>$HashPassword];
+                    $accountModel->update($user,$data);
+                    return $this->response->setJSON(['success' => 'Successfully submitted']);
+                }
+            }
+        }
+    }
+
     public function fetchCompetence()
     {
         $searchTerm = $_GET['search']['value'] ?? ''; 
@@ -1014,6 +1160,48 @@ class Home extends BaseController
             $logModel = new \App\Models\logModel();
             $data = ['account_id'=>session()->get('loggedUser'),
                     'activities'=>'Added new competency : '.$this->request->getPost('title'),
+                    'page'=>'Settings',
+                    'datetime'=>date('Y-m-d h:i:s a')
+                    ];      
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function editCompetence()
+    {
+        $val = $this->request->getGet('value');
+        $competenceModel = new \App\Models\competenceModel();
+        $competence = $competenceModel->WHERE('eligibility_id',$val)->first();
+        $data = [
+            'id'=>$val,
+            'name'=>$competence['eligibility_name']
+        ];
+        return $this->response->SetJSON($data);
+    }
+
+    public function updateCompetence()
+    {
+        $competenceModel = new \App\Models\competenceModel();
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'title'=>'required'
+        ]);   
+
+        if(!$validation)
+        {
+            return $this->response->setJSON(['error'=>$this->validator->getErrors()]);
+        }
+        else
+        {
+            $id = $this->request->getPost('competence_id');
+            $data =  ['eligibility_name'=>$this->request->getPost('title')];
+            $competenceModel->update($id, $data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = ['account_id'=>session()->get('loggedUser'),
+                    'activities'=>'Update competency : '.$this->request->getPost('title'),
                     'page'=>'Settings',
                     'datetime'=>date('Y-m-d h:i:s a')
                     ];      

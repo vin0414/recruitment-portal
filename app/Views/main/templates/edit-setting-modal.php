@@ -270,3 +270,94 @@
         </div>
     </div>
 </div>
+
+<div class="modal modal-blur fade" id="editCompetenceModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Competence</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" class="row g-3" id="frmEditCompetence">
+                    <?=csrf_field()?>
+                    <input type="hidden" name="competence_id" id="competence_id"/>
+                    <div class="col-lg-12">
+                        <label class="form-label">Title of Competency</label>
+                        <input type="text" class="form-control" name="title" id="title" required />
+                        <div id="title-error" class="error-message text-danger text-sm"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="form-control btn btn-outline-success">
+                            <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-blur fade" id="editCategoryModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Category</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" class="row g-3" id="frmEditCategory">
+                    <?=csrf_field()?>
+                    <input type="hidden" name="category_id" id="category_id"/>
+                    <div class="col-lg-12">
+                        <label class="form-label">Category</label>
+                        <input type="text" class="form-control" name="category" id="category" required />
+                        <div id="category-error" class="error-message text-danger text-sm"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="form-label">Code</label>
+                        <input type="text" class="form-control" name="category_code" id="cat_code" required />
+                        <div id="category_code-error" class="error-message text-danger text-sm"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="form-control btn btn-outline-success">
+                            <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-blur fade" id="editOfficeTypeModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">New Type of Office</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" class="row g-3" id="frmEditOfficeType">
+                    <?=csrf_field()?>
+                    <input type="hidden" name="office_id" id="office_number"/>
+                    <div class="col-lg-12">
+                        <label class="form-label">Name of Office</label>
+                        <input type="text" class="form-control" name="office_name" id="office_name" required />
+                        <div id="office_name-error" class="error-message text-danger text-sm"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <label class="form-label">Office Code</label>
+                        <input type="text" class="form-control" name="office_code"  id="office_code" required />
+                        <div id="office_code-error" class="error-message text-danger text-sm"></div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="form-control btn btn-outline-success">
+                            <i class="ti ti-device-floppy"></i>&nbsp;Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

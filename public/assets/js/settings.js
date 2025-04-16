@@ -174,9 +174,6 @@ let list = $('#tblcompetence').DataTable({
     "searching": true,
     "columns": [
         {
-            "data": "id"
-        },
-        {
             "data": "title"
         },
         {
@@ -239,6 +236,50 @@ $(document).on('click', '.editOffice', function () {
             }
             selectOptionByValue(response.academic);
             $('#editOfficeModal').modal('show');
+        }
+    });
+});
+
+$(document).on('click','.editCompetence',function(){
+    $.ajax({
+        url: window.location.origin + "/fetch-edit-competence",
+        method: "GET",
+        data: { value: $(this).val() },
+        dataType: "JSON",
+        success: function (response) {
+            $('#competence_id').attr("value", response.id);
+            $('#title').attr("value", response.name);
+            $('#editCompetenceModal').modal('show');
+        }
+    });
+});
+
+$(document).on('click','.editApp',function(){
+    $.ajax({
+        url: window.location.origin + "/edit-category",
+        method: "GET",
+        data: { value: $(this).val() },
+        dataType: "JSON",
+        success: function (response) {
+            $('#category_id').attr("value", response.id);
+            $('#category').attr("value", response.title);
+            $('#cat_code').attr("value", response.code);
+            $('#editCategoryModal').modal('show');
+        }
+    });
+});
+
+$(document).on('click','.editType',function(){
+    $.ajax({
+        url: window.location.origin + "/edit-types",
+        method: "GET",
+        data: { value: $(this).val() },
+        dataType: "JSON",
+        success: function (response) {
+            $('#office_number').attr("value", response.id);
+            $('#office_name').attr("value", response.name);
+            $('#office_code').attr("value", response.code);
+            $('#editOfficeTypeModal').modal('show');
         }
     });
 });

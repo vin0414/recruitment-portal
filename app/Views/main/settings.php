@@ -244,7 +244,6 @@
                                                         <table class="table table-bordered table-striped"
                                                             id="tblcompetence">
                                                             <thead>
-                                                                <th>#</th>
                                                                 <th>Title</th>
                                                                 <th>Date</th>
                                                                 <th>Action</th>
@@ -408,6 +407,43 @@
         });
     });
 
+    $('#frmEditOfficeType').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-types",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editOfficeTypeModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            type_office.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
     $('#frmSystem').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
@@ -458,6 +494,43 @@
                         if (result.isConfirmed) {
                             $('#frmCompetence')[0].reset();
                             $('#competenceModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            list.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmEditCompetence').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-competence",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editCompetenceModal').modal('hide');
                             // Perform some action when "Yes" is clicked
                             list.ajax.reload();
                         }
@@ -721,6 +794,43 @@
                         if (result.isConfirmed) {
                             $('#frmCategory')[0].reset();
                             $('#categoryModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            app.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmEditCategory').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-category",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editCategoryModal').modal('hide');
                             // Perform some action when "Yes" is clicked
                             app.ajax.reload();
                         }

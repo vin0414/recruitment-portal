@@ -34,14 +34,21 @@ $routes->post('update-course','Home::updateCourse');
 //application
 $routes->get('fetch-app','Home::fetchApp');
 $routes->post('save-category','Home::saveCategory');
+$routes->get('edit-category','Home::editCategory');
+$routes->post('update-category','Home::updateCategory');
 //types of office
 $routes->get('fetch-types','Home::fetchTypes');
 $routes->post('save-types','Home::saveTypes');
+$routes->get('edit-types','Home::editTypes');
+$routes->post('update-types','Home::updateTypes');
 //system password
 $routes->post('system-password','Home::systemPassword');
+$routes->post('change-password','Home::changePassword');
 //competencies
 $routes->get('fetch-competence','Home::fetchCompetence');
 $routes->post('save-competence','Home::saveCompetence');
+$routes->get('fetch-edit-competence','Home::editCompetence');
+$routes->post('update-competence','Home::updateCompetence');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -53,7 +60,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('overview','Home::overview');
     //job posting
-    $routes->get('job-posting','Home::jobPosting');
+    $routes->get('jobs','Home::jobPosting');
+    $routes->get('jobs/create','Home::createJob');
     //point system
     $routes->get('point-system','Home::pointSystem');
     //account

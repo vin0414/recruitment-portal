@@ -1,0 +1,1 @@
+$('#tblhiring').DataTable();

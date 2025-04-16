@@ -11,7 +11,6 @@
     <link href="<?=base_url('assets/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('assets/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -161,8 +160,38 @@
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('assets/js/demo.min.js')?>" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmPassword').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: "<?=site_url('change-password')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    $('#frmPassword')[0].reset();
+                    Swal.fire({
+                        title: "Great!",
+                        text: "Successfully applied changes",
+                        icon: "success"
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

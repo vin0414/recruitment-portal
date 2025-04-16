@@ -100,6 +100,22 @@
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Entries</h6>
                 </li>
+                <li class="nav-item <?= ($title == 'Post A Job') ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?=site_url('jobs/create')?>">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-mailbox">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5" />
+                                <path d="M12 11v-8h4l2 2l-2 2h-4" />
+                                <path d="M6 15h1" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title"> Post A Job </span>
+                    </a>
+                </li>
                 <li class="nav-item <?= ($title == 'Create Account') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('create-account')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
