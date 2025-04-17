@@ -66,9 +66,45 @@
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <div class="tab-pane fade active show" id="tabs-home-8"></div>
-                                <div class="tab-pane fade" id="tabs-training-8"></div>
-                                <div class="tab-pane fade" id="tabs-job-8"></div>
+                                <div class="tab-pane fade active show" id="tabs-home-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="educations">
+                                            <thead>
+                                                <th>Level</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-training-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="trainings">
+                                            <thead>
+                                                <th>Level</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tabs-job-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="experiences">
+                                            <thead>
+                                                <th>Level</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -104,6 +140,7 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script src="<?=base_url('assets/js/point-system.js')?>"></script>
 </body>
 
 </html>
