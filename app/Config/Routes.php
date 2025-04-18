@@ -10,12 +10,18 @@ $routes->get('/', 'Home::index');
 $routes->post('checkAuth','Home::checkAuth');
 $routes->get('verify/(:any)','Home::verifyAccount/$1');
 $routes->get('logout','Home::logout');
+//point system
+$routes->get('fetch-education-data','Job::fetchEducationData');
+$routes->get('fetch-training-data','Job::fetchTrainingData');
+$routes->get('fetch-experience-data','Job::fetchExperienceData');
+$routes->post('save-education-data','Job::saveEducation');
+$routes->post('save-training-data','Job::saveTraining');
+$routes->post('save-experience-data','Job::saveExperience');
 //accounts
 $routes->get('fetch-account','Home::fetchAccount');
 $routes->post('save-account','Home::saveAccount');
 $routes->post('reset-account','Home::resetAccount');
 $routes->post('modify-account','Home::modifyAccount');
-///settings
 //role
 $routes->post('save-role','Home::saveRole');
 $routes->get('fetch-role','Home::fetchRole');
