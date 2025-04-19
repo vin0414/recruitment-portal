@@ -17,6 +17,12 @@ $routes->get('fetch-experience-data','Job::fetchExperienceData');
 $routes->post('save-education-data','Job::saveEducation');
 $routes->post('save-training-data','Job::saveTraining');
 $routes->post('save-experience-data','Job::saveExperience');
+$routes->get('fetch-edit-education','Job::editEducation');
+$routes->get('fetch-edit-training','Job::editTraining');
+$routes->get('fetch-edit-experience','Job::editExperience');
+$routes->post('update-education','Job::updateEducation');
+$routes->post('update-training','Job::updateTraining');
+$routes->post('update-experience','Job::updateExperience');
 //accounts
 $routes->get('fetch-account','Home::fetchAccount');
 $routes->post('save-account','Home::saveAccount');

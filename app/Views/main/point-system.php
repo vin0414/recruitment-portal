@@ -230,6 +230,44 @@
         </div>
     </div>
 
+
+    <div class="modal modal-blur fade" id="editEducationModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Education</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmEditEducation">
+                        <?=csrf_field()?>
+                        <input type="hidden" name="education_id" id="education_id" />
+                        <div class="col-lg-12">
+                            <label class="form-label">Level</label>
+                            <input type="number" class="form-control" name="edit_level" id="edit_level" required />
+                            <div id="edit_level-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">From</label>
+                            <input type="text" class="form-control" name="edit_from" id="edit_from" required />
+                            <div id="edit_from-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">To</label>
+                            <input type="text" class="form-control" name="edit_to" id="edit_to" required />
+                            <div id="edit_to-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="form-control btn btn-outline-success">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal modal-blur fade" id="trainingModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
@@ -266,6 +304,46 @@
         </div>
     </div>
 
+    <div class="modal modal-blur fade" id="editTrainingModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Training</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmEditTraining">
+                        <?=csrf_field()?>
+                        <input type="hidden" name="training_id" id="training_id" />
+                        <div class="col-lg-12">
+                            <label class="form-label">Level</label>
+                            <input type="number" class="form-control" name="edit_training_level"
+                                id="edit_training_level" required />
+                            <div id="edit_training_level-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">From</label>
+                            <input type="text" class="form-control" name="edit_from_training" id="edit_from_training"
+                                required />
+                            <div id="edit_from_training-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">To</label>
+                            <input type="text" class="form-control" name="edit_to_training" id="edit_to_training"
+                                required />
+                            <div id="edit_to_training-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="form-control btn btn-outline-success">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal modal-blur fade" id="experienceModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
@@ -278,22 +356,62 @@
                         <?=csrf_field()?>
                         <div class="col-lg-12">
                             <label class="form-label">Level</label>
-                            <input type="number" class="form-control" name="level" required />
-                            <div id="level-error" class="error-message text-danger text-sm"></div>
+                            <input type="number" class="form-control" name="experience_level" required />
+                            <div id="experience_level-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">From</label>
-                            <input type="text" class="form-control" name="from" required />
-                            <div id="from-error" class="error-message text-danger text-sm"></div>
+                            <input type="text" class="form-control" name="from_experience" required />
+                            <div id="from_experience-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">To</label>
-                            <input type="text" class="form-control" name="to" required />
-                            <div id="to-error" class="error-message text-danger text-sm"></div>
+                            <input type="text" class="form-control" name="to_experience" required />
+                            <div id="to_experience-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <button type="submit" class="form-control btn btn-outline-success">
                                 <i class="ti ti-device-floppy"></i>&nbsp;Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="editExperienceModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Experience</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmEditExperience">
+                        <?=csrf_field()?>
+                        <input type="hidden" name="experience_id" id="experience_id" />
+                        <div class="col-lg-12">
+                            <label class="form-label">Level</label>
+                            <input type="number" class="form-control" name="edit_experience_level"
+                                id="edit_experience_level" required />
+                            <div id="edit_experience_level-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">From</label>
+                            <input type="text" class="form-control" name="edit_from_experience" id="edit_f_experience"
+                                required />
+                            <div id="edit_from_experience-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">To</label>
+                            <input type="text" class="form-control" name="edit_to_experience" id="edit_t_experience"
+                                required />
+                            <div id="edit_to_experience-error" class="error-message text-danger text-sm"></div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="form-control btn btn-outline-success">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
                             </button>
                         </div>
                     </form>
@@ -340,6 +458,43 @@
         });
     });
 
+    $('#frmEditEducation').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-education",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editEducationModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            educations.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
     $('#frmTraining').on('submit', function(e) {
         e.preventDefault();
         let data = $(this).serialize();
@@ -362,6 +517,118 @@
                             // Perform some action when "Yes" is clicked
                             $('#frmTraining')[0].reset();
                             trainings.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmEditTraining').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-training",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editTrainingModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            trainings.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmExperience').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-experience-data",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully saved",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#experienceModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            $('#frmExperience')[0].reset();
+                            experience.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmEditExperience').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/update-experience",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully applied changes",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#editExperienceModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            experience.ajax.reload();
                         }
                     });
                 } else {

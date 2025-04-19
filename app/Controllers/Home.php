@@ -94,6 +94,7 @@ class Home extends BaseController
         // Get the login attempts and the time of the last failed attempt
         $attempts = $session->get('login_attempts') ?? 0;
         $lastAttemptTime = $session->get('last_attempt_time');
+        $firstFailedAttemptTime = $session->get('first_failed_attempt_time');
 
         // If the user has reached the max attempts, check if they're locked out
         if ($attempts >= 5) {
@@ -101,6 +102,11 @@ class Home extends BaseController
             if ($lastAttemptTime && (time() - $lastAttemptTime) < 900) {
                 return true;
             }
+        }
+
+        if ($firstFailedAttemptTime && (time() - $firstFailedAttemptTime) < 1800) {
+            // If within 15 minutes after first 5 failed attempts, enforce second lockout (30 minutes)
+            return true;
         }
 
         return false;
@@ -728,11 +734,11 @@ class Home extends BaseController
         foreach ($role as $row) {
             $response['data'][] = [
                 'role'=>$row['role_name'],
-                'points' =>($row['point-system']==1) ? 'Yes' : 'No',
-                'setting' =>($row['settings']==1) ? 'Yes' : 'No',
-                'posting' =>($row['posting']==1) ? 'Yes' : 'No',
-                'users' =>($row['users']==1) ? 'Yes' : 'No',
-                'tracking' =>($row['monitoring']==1) ? 'Yes' : 'No',
+                'points' =>($row['point-system']==1) ? '<i class="ti ti-check"></i>' : '<i class="ti ti-x"></i>',
+                'setting' =>($row['settings']==1) ? '<i class="ti ti-check"></i>' : '<i class="ti ti-x"></i>',
+                'posting' =>($row['posting']==1) ? '<i class="ti ti-check"></i>' : '<i class="ti ti-x"></i>',
+                'users' =>($row['users']==1) ? '<i class="ti ti-check"></i>' : '<i class="ti ti-x"></i>',
+                'tracking' =>($row['monitoring']==1) ? '<i class="ti ti-check"></i>' : '<i class="ti ti-x"></i>',
                 'action' => '<button class="btn btn-success editRole" value="' . $row['role_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
             ];
         }
