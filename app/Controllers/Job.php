@@ -13,7 +13,42 @@ class Job extends BaseController
 
     public function saveEducation()
     {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'level'=>'required|is_unique[education_points.level]',
+            'from'=>'required|is_unique[education_points.from]',
+            'to'=>'required|is_unique[education_points.to]',
+        ]);
 
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            if(session()->get('role')=="Admin"||session()->get('role')=="Super-admin")
+            {
+                $educationPointModel = new \App\Models\educationPointModel();
+                $data = ['from'=>$this->request->getPost('from'),
+                         'to'=>$this->request->getPost('to'),
+                         'level'=>$this->request->getPost('level'),
+                         'account_id'=>session()->get('loggedUser'),
+                         'date_created'=>date('Y-m-d')];
+                $educationPointModel->save($data);
+                //logs
+                date_default_timezone_set('Asia/Manila');
+                $logModel = new \App\Models\logModel();
+                $data = ['account_id'=>session()->get('loggedUser'),
+                        'activities'=>'Added new point system for education',
+                        'page'=>'Point System',
+                        'datetime'=>date('Y-m-d h:i:s a')
+                        ];      
+                $logModel->save($data);
+                return $this->response->SetJSON(['success' => 'Successfully added']);
+            }
+            $errorMsg = ["level"=>"Invalid Transaction"];
+            return $this->response->SetJSON(['error' =>$errorMsg]);
+        }
     }
 
     public function fetchEducationData()
@@ -53,7 +88,42 @@ class Job extends BaseController
 
     public function saveTraining()
     {
+        $validation = $this->validate([
+            'csrf_deped'=>'required',
+            'training_level'=>'required|is_unique[training_points.level]',
+            'from_training'=>'required|is_unique[training_points.from]',
+            'to_training'=>'required|is_unique[training_points.to]',
+        ]);
 
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            if(session()->get('role')=="Admin"||session()->get('role')=="Super-admin")
+            {
+                $trainingPointModel = new \App\Models\trainingPointModel();
+                $data = ['from'=>$this->request->getPost('from_training'),
+                         'to'=>$this->request->getPost('to_training'),
+                         'level'=>$this->request->getPost('training_level'),
+                         'account_id'=>session()->get('loggedUser'),
+                         'date_created'=>date('Y-m-d')];
+                $trainingPointModel->save($data);
+                //logs
+                date_default_timezone_set('Asia/Manila');
+                $logModel = new \App\Models\logModel();
+                $data = ['account_id'=>session()->get('loggedUser'),
+                        'activities'=>'Added new point system for trainings',
+                        'page'=>'Point System',
+                        'datetime'=>date('Y-m-d h:i:s a')
+                        ];      
+                $logModel->save($data);
+                return $this->response->SetJSON(['success' => 'Successfully added']);
+            }
+            $errorMsg = ["level"=>"Invalid Transaction"];
+            return $this->response->SetJSON(['error' =>$errorMsg]);
+        }
     }
 
     public function fetchTrainingData()
@@ -84,7 +154,7 @@ class Job extends BaseController
                 'level'=>$row['level'],
                 'from'=>$row['from'],
                 'to' =>$row['to'],
-                'action' => '<button class="btn btn-success editTraining" value="' . $row['education_training_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+                'action' => '<button class="btn btn-success editTraining" value="' . $row['training_point_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
             ];
         }
         // Return the response as JSON
@@ -124,7 +194,7 @@ class Job extends BaseController
                 'level'=>$row['level'],
                 'from'=>$row['from'],
                 'to' =>$row['to'],
-                'action' => '<button class="btn btn-success editExperience" value="' . $row['education_experience_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
+                'action' => '<button class="btn btn-success editExperience" value="' . $row['experience_point_id'] . '"><i class="ti ti-edit"></i>&nbsp;Edit</button>'
             ];
         }
         // Return the response as JSON

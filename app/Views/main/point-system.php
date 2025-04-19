@@ -192,6 +192,7 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="<?=base_url('assets/js/point-system.js')?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <div class="modal modal-blur fade" id="educationModal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
@@ -241,18 +242,18 @@
                         <?=csrf_field()?>
                         <div class="col-lg-12">
                             <label class="form-label">Level</label>
-                            <input type="number" class="form-control" name="level" required />
-                            <div id="level-error" class="error-message text-danger text-sm"></div>
+                            <input type="number" class="form-control" name="training_level" required />
+                            <div id="training_level-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">From</label>
-                            <input type="text" class="form-control" name="from" required />
-                            <div id="from-error" class="error-message text-danger text-sm"></div>
+                            <input type="text" class="form-control" name="from_training" required />
+                            <div id="from_training-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <label class="form-label">To</label>
-                            <input type="text" class="form-control" name="to" required />
-                            <div id="to-error" class="error-message text-danger text-sm"></div>
+                            <input type="text" class="form-control" name="to_training" required />
+                            <div id="to_training-error" class="error-message text-danger text-sm"></div>
                         </div>
                         <div class="col-lg-12">
                             <button type="submit" class="form-control btn btn-outline-success">
@@ -300,6 +301,83 @@
             </div>
         </div>
     </div>
+    <script>
+    $('#frmEducation').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-education-data",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully saved",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#educationModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            $('#frmEducation')[0].reset();
+                            educations.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmTraining').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $('.error-message').html('');
+        $.ajax({
+            url: window.location.origin + "/save-training-data",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully saved",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#trainingModal').modal('hide');
+                            // Perform some action when "Yes" is clicked
+                            $('#frmTraining')[0].reset();
+                            trainings.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
